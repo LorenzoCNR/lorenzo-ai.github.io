@@ -1,0 +1,259 @@
+/* ===========================
+   GLOBAL SETTINGS
+   =========================== */
+
+/* Reset base del browser */
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+ /* font moderno tecnico */
+    background-color: #0b0f16; /* nero profondo */
+    color: #e6edf5; /* testo principale chiaro */
+    overflow-x: hidden;
+}
+
+/* ===========================
+   BACKGROUND GLOW (EFFETTO ATMOSFERA)
+   =========================== */
+
+/* Pseudo-elemento che crea un alone blu dinamico */
+body::before {
+    content: "";
+    position: fixed;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(0, 150, 255, 0.12), transparent 70%);
+    top: -250px;
+    left: -250px;
+    filter: blur(120px);
+    animation: floatGlow 14s ease-in-out infinite alternate;
+    z-index: -1; /* resta dietro tutto */
+}
+
+/* Animazione lenta del glow */
+@keyframes floatGlow {
+    0% { transform: translate(0px, 0px); }
+    100% { transform: translate(150px, 120px); }
+}
+
+
+/* ===========================
+   HERO SECTION
+   height determian quanta part edi schermo occupa
+   =========================== */
+
+
+
+.hero {
+    height: 65vh; /* quasi pieno schermo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+/* Contenitore del testo */
+.hero-content {
+    opacity: 0; /* parte invisibile */
+    transform: translateY(30px); /* parte leggermente sotto */
+    animation: fadeIn 1.5s ease forwards; /* animazione comparsa */
+}
+
+/* Animazione comparsa elegante */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Titolo principale */
+.hero-content h1 {
+    font-size: 60px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: #ffffff;
+
+    /* alone leggero sofisticato */
+    text-shadow: 0 0 25px rgba(77, 163, 255, 0.2);
+}
+
+/* Sottotitolo */
+.hero-content p {
+    font-size: 20px;
+    max-width: 700px;
+    margin: 0 auto;
+    color: #9aa7bd;
+    line-height: 1.7;
+}
+
+/* ===========================
+   FOCUS / PROJECT TEASER SECTION
+   =========================== */
+
+.focus {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    padding: 80px 40px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    text-align: center;
+}
+
+.focus-item {
+    max-width: 300px;
+    transition: transform 0.3s ease;
+}
+
+.focus-item:hover {
+    transform: translateY(-6px); /* effetto leggero movimento */
+}
+
+.focus-item h3 {
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.focus-item p {
+    color: #8c99ad;
+    line-height: 1.6;
+}
+
+
+/* ===========================
+   PROJECTS PAGE STRUCTURE
+   =========================== */
+
+/* Contenitore centrale per dare respiro */
+main {
+    max-width: 1000px;          /* limita larghezza */
+    margin: 0 auto;             /* centra */
+    padding: 100px 40px;        /* spazio sopra e ai lati */
+}
+
+/* Ogni progetto */
+.project {
+    margin-bottom: 100px;       /* spazio verticale deciso */
+    padding-bottom: 50px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Titolo progetto */
+.project h2 {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #ffffff;
+    line-height: 1.3;
+}
+
+/* Descrizione principale */
+.project p {
+    font-size: 17px;
+    color: #9aa7bd;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    max-width: 800px;
+}
+
+/* Tech stack */
+.project .tech {
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #4da3ff;
+    opacity: 0.8;
+}
+
+
+/* ===========================
+   FOOTER
+   =========================== */
+
+footer {
+    text-align: center;
+    padding: 60px;
+    font-size: 14px;
+    color: #5e6b80;
+}
+
+
+
+/* ===========================
+   NAVBAR – STRUTTURA UNICA
+   =========================== */
+
+.navbar {
+    display: flex;                  /* mette logo e nav sulla stessa riga */
+    justify-content: space-between; /* logo a sinistra, link a destra */
+    align-items: center;            /* allinea verticalmente */
+    
+    max-width: 1200px;              /* larghezza massima coerente */
+    margin: 0 auto;                 /* centra tutto */
+    padding: 30px 40px;             /* spazio interno */
+}
+
+/* Titolo sinistra */
+.logo {
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: #ffffff;
+}
+
+/* Link a destra */
+.navbar nav {
+    display: flex;
+    gap: 35px; /* distanza uniforme tra link */
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #a8b3c7;
+    font-size: 15px;
+    transition: 0.3s ease;
+}
+
+.navbar a:hover {
+    color: #4da3ff;
+}
+/* ===========================
+   PAGE HEADER (Projects Page)
+   =========================== */
+
+.page-header {
+    position: relative;          /* serve per posizionare nav */
+    padding: 80px 40px 40px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Menu in alto a destra */
+.top-nav {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    display: flex;
+    gap: 30px;
+}
+
+.top-nav a {
+    text-decoration: none;
+    color: #a8b3c7;
+    font-size: 15px;
+    transition: 0.3s ease;
+}
+
+.top-nav a:hover {
+    color: #4da3ff;
+}
+
+/* Titolo centrale */
+.page-title {
+    text-align: center;
+    font-size: 52px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+}
