@@ -1,113 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Codifica caratteri -->
     <meta charset="UTF-8">
-
-    <!-- Titolo che appare nella tab del browser -->
-    <title>PROJECTS — Lorenzo</title>
-
-    <!-- Collegamento al file CSS -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects — Lorenzo Ognibeni</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <!-- ============================= -->
-    <!-- HEADER -->
-    <!-- ============================= -->
-<header class="page-header">
-
-    <!-- Menu in alto a destra -->
-    <nav class="top-nav">
+<header class="navbar">
+    <div class="logo">Lorenzo Ognibeni</div>
+    <nav>
         <a href="index.html">Home</a>
         <a href="contact.html">Contact</a>
     </nav>
-
-    <!-- Titolo centrale della pagina -->
-    <h1 class="page-title">Projects</h1>
-
 </header>
 
+<main class="page-content">
 
+    <h1 class="page-title">Selected Research & Modeling Projects</h1>
 
-    <!-- ============================= -->
-    <!-- CONTENUTO PRINCIPALE -->
-    <!-- ============================= -->
-    <main>
-
-        <!-- PROGETTO 1 -->
-        <section class="project">
-            <h2>Neuro-Bridge – Representation Learning for Brain-to-Brain Coupling</h2>
-
+    <!-- ===================== REPRESENTATION ===================== -->
+    <section class="project-section" id="representation">
+        <div class="section-head">
+            <h2>Representation Learning & Neural Systems</h2>
             <p>
-          Neuro-Bridge is a modular research platform for modeling high-dimensional neural signals using deep learning and geometric representation learning.
-It includes contrastive embedding architectures, transformer-based encoders for temporal neural sequences, and custom decoding modules for cross-condition generalization and representation stability analysis.
+                Modular contrastive learning frameworks for high-dimensional neural signals,
+                focusing on representation geometry, robustness and cross-condition generalization.
             </p>
+        </div>
 
-            <!-- Riga tecnologie -->
-            <div class="tech">
-                Python ·PyTorch · Contrastive Learning · Transformer  · Representation Learning · Neural Signal Processing
-            </div>
-        </section>
+        <div class="project-grid">
+
+            <a class="project-item" href="projects/neurobridge.html" target="_blank" rel="noopener noreferrer">
+                <h3>Neuro-Bridge</h3>
+                <p>Contrastive embedding, decoding and manifold stability analysis.</p>
+                <div class="project-meta">Project page →</div>
+            </a>
+
+            <a class="project-item" href="projects/eeg-bci.html" target="_blank" rel="noopener noreferrer">
+                <h3>EEG-Based BCI</h3>
+                <p>Manifold learning for subject-specific neural feature extraction.</p>
+                <div class="project-meta">Project page →</div>
+            </a>
+
+            <a class="project-item" href="projects/medical-imaging.html" target="_blank" rel="noopener noreferrer">
+                <h3>Medical Imaging</h3>
+                <p>U-Net based CT segmentation and medical representation modeling.</p>
+                <div class="project-meta">Project page →</div>
+            </a>
+
+        </div>
+    </section>
 
 
-        <!-- PROGETTO 2 -->
-        <section class="project">
-            <h2>Systemic Risk & Financial Econometrics</h2>
-
+    <!-- ===================== RISK ===================== -->
+    <section class="project-section" id="risk">
+        <div class="section-head">
+            <h2>Systemic Risk & Regime Modeling</h2>
             <p>
-            Quantitative modeling of financial instability using Bayesian tail-risk estimation, regime-switching dynamics and network-based contagion structures.
-Focus on stress scenarios, volatility spillovers and early-warning indicators derived from both market data and textual macro-financial signals.
+                Probabilistic modeling of financial instability, regime shifts and tail risk
+                under structural uncertainty.
             </p>
+        </div>
 
-            <div class="tech">
-                Bayesian Inference · Markov Switching · DCC-GARCH · Tail Risk Modeling · Text-based Risk Signals
-            </div>
-        </section>
+        <div class="project-grid">
+
+            <a class="project-item" href="projects/bayesian-var.html" target="_blank" rel="noopener noreferrer">
+                <h3>Bayesian VaR & Tail Risk</h3>
+                <p>Extreme risk estimation under non-Gaussian distributions.</p>
+                <div class="project-meta">Project page →</div>
+            </a>
+
+            <a class="project-item" href="projects/markov-switching.html" target="_blank" rel="noopener noreferrer">
+                <h3>Markov Switching Models</h3>
+                <p>Structural break detection in macro-financial systems.</p>
+                <div class="project-meta">Project page →</div>
+            </a>
+
+            <a class="project-item" href="projects/partial-cointegration.html" target="_blank" rel="noopener noreferrer">
+                <h3>Partial Cointegration</h3>
+                <p>Hybrid mean-reverting and random-walk modeling for arbitrage systems.</p>
+                <div class="project-meta">Project page →</div>
+            </a>
+
+        </div>
+    </section>
 
 
-        <!-- PROGETTO 3 -->
-        <section class="project">
-            <h2>Geopolitical Risk Index & Conflict Escalation Modeling</h2>
-
+    <!-- ===================== CAUSAL ===================== -->
+    <section class="project-section" id="causal">
+        <div class="section-head">
+            <h2>Causal & Institutional Systems</h2>
             <p>
-            Construction of a geopolitical risk index using news frequency analysis,
-            structural VAR identification and zero-inflated models to estimate
-            conflict escalation probabilities.
+                Quasi-experimental and structural approaches to institutional dynamics,
+                conflict escalation and geopolitical systems.
             </p>
+        </div>
 
-            <div class="tech">
-                NLP · Structural VAR · Zero-Inflated Logit · Markov Chains
-            </div>
-        </section>
+        <div class="project-grid">
 
+            <a class="project-item" href="projects/geographic-rdd.html" target="_blank" rel="noopener noreferrer">
+                <h3>Geographic RDD</h3>
+                <p>Spatial discontinuity design using historical concession boundaries.</p>
+                <div class="project-meta">Project page →</div>
+            </a>
 
-        <!-- PROGETTO 4 -->
-        <section class="project">
-            <h2>Advanced Policy Evaluation & Geographic RDD</h2>
+            <a class="project-item" href="projects/conflict-modeling.html" target="_blank" rel="noopener noreferrer">
+                <h3>Conflict Escalation Modeling</h3>
+                <p>Zero-inflated and Markov-chain approaches to civil conflict dynamics.</p>
+                <div class="project-meta">Project page →</div>
+            </a>
 
-            <p>
-            Causal inference using Geographic Regression Discontinuity Design,
-            matching estimators and quasi-experimental methods applied to
-            institutional development and macro-policy evaluation.
-            </p>
+            <a class="project-item" href="projects/remittance-model.html" target="_blank" rel="noopener noreferrer">
+                <h3>Remittance Decision Models</h3>
+                <p>Double-hurdle modeling of migrant financial behavior.</p>
+                <div class="project-meta">Project page →</div>
+            </a>
 
-            <div class="tech">
-                RDD · Matching · Causal Inference · Stata · MATLAB · QGIS
-            </div>
-        </section>
+        </div>
+    </section>
 
-    </main>
+</main>
 
-
-    <!-- ============================= -->
-    <!-- FOOTER -->
-    <!-- ============================= -->
-    <footer>
-        <p>&copy; 2025 Lorenzo Ognibeni</p>
-    </footer>
+<footer>
+    <p>© 2023–2026 Lorenzo Ognibeni</p>
+</footer>
 
 </body>
 </html>
