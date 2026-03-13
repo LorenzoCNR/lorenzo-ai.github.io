@@ -2,174 +2,141 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Partial Cointegration — Lorenzo Ognibeni</title>
+
+<title>Partial Cointegration — Research Note</title>
+
 <link rel="stylesheet" href="../style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+
+<script data-goatcounter="https://lorenzo-ai.goatcounter.com/count"
+async src="//gc.zgo.at/count.js"></script>
+
 </head>
+
 
 <body>
 
 <header class="navbar">
-<div class="logo">Lorenzo Ognibeni</div>
 
+<div class="logo">
+Signal & Structure
+</div>
 
 <nav>
 <a href="../index.html">Home</a>
 <a href="../projects.html">Projects</a>
-<a href="index.html">Research Notes</a>
+<a href="../notes/index.html">Research Notes</a>
 <a href="../contact.html">Contact</a>
 </nav>
 
-
 </header>
 
-<main class="page-content">
 
-<h1 class="page-title">Partial Cointegration & Statistical Arbitrage</h1>
+
+<main class="project-page">
+
+<h1 class="page-title">
+Partial Cointegration
+</h1>
+
+
+<h2>Concept</h2>
 
 <p>
-This project investigates statistical arbitrage strategies based on 
-<b>partial cointegration</b>, a framework that extends classical 
-cointegration by allowing spreads to contain both a 
-mean-reverting component and a persistent stochastic trend.
+Classical cointegration assumes that spreads between assets are fully
+mean-reverting. In practice many spreads exhibit hybrid dynamics,
+combining temporary mean reversion with persistent stochastic drift.
 </p>
 
 <p>
-The objective is to evaluate whether partial cointegration models
-provide more robust trading signals than classical Engle–Granger
-cointegration when applied to equity pairs.
-</p>
-
-<h2>Motivation</h2>
-
-<p>
-Traditional pairs trading assumes that spreads are fully mean-reverting.
-However, many empirical spreads exhibit hybrid dynamics combining
-short-term mean reversion with longer-term stochastic drift.
-Partial cointegration models capture this structure by decomposing
+Partial cointegration extends the classical framework by decomposing
 the spread into stationary and non-stationary components.
 </p>
 
-<h2>Model Framework</h2>
 
-<p>
-Under partial cointegration the spread can be represented as
-</p>
 
-<pre>
-W_t = M_t + R_t
+<h2>Model Representation</h2>
 
-M_t = ρ M_{t−1} + ε_t
-R_t = R_{t−1} + η_t
-</pre>
+<div class="equation">
 
-<p>
-where:
-</p>
+W<sub>t</sub> = M<sub>t</sub> + R<sub>t</sub>
 
-<ul>
-<li><b>M_t</b> is a mean-reverting AR(1) component</li>
-<li><b>R_t</b> is a random walk component</li>
-<li><b>W_t</b> is the observed spread</li>
-</ul>
+</div>
 
-<p>
-The latent components are estimated through a Kalman filtering approach.
-</p>
+<div class="equation">
 
-<h2>Data & Pair Selection</h2>
+M<sub>t</sub> = ρ M<sub>t−1</sub> + ε<sub>t</sub>
+
+</div>
+
+<div class="equation">
+
+R<sub>t</sub> = R<sub>t−1</sub> + η<sub>t</sub>
+
+</div>
 
 <ul>
-<li>S&P 500 equity universe</li>
-<li>Daily adjusted prices</li>
-<li>Correlation-based pair screening</li>
-<li>Cointegration diagnostics</li>
+
+<li><b>M<sub>t</sub></b> mean-reverting component</li>
+
+<li><b>R<sub>t</sub></b> stochastic trend</li>
+
+<li><b>W<sub>t</sub></b> observed spread</li>
+
 </ul>
 
-<h2>Trading Strategy</h2>
+
+
+<h2>State-Space Representation</h2>
 
 <p>
-Trading signals are generated from the standardized spread:
+The model can be written in state-space form and estimated using
+Kalman filtering. This allows the latent components of the spread
+to be inferred from observed prices.
 </p>
 
-<pre>
-z_t = (spread_t − μ) / σ
-</pre>
 
-<ul>
-<li>Enter positions when |z| exceeds threshold</li>
-<li>Exit when spread reverts toward equilibrium</li>
-<li>Transaction costs and slippage included</li>
-</ul>
 
-<h2>Model Comparison</h2>
+<h2>Interpretation</h2>
 
 <p>
-The project compares two modeling frameworks:
+In trading applications the mean-reverting component represents
+temporary mispricing, while the stochastic trend captures persistent
+structural deviations.
 </p>
 
-<ul>
-<li>Engle–Granger Cointegration</li>
-<li>Partial Cointegration (state-space representation)</li>
-</ul>
+
+
+<h2>Related Project</h2>
 
 <p>
-Performance is evaluated through cumulative returns,
-Sharpe ratio and drawdown statistics.
-</p>
-
-<h2>Implementation</h2>
-
-<p>
-The full pipeline is implemented in <b>R</b> using econometric time-series
-libraries for cointegration testing, state-space estimation and
-financial performance analysis.
-</p>
-
-<pre>
-CI  <- egcm(X, Y)
-PCI <- fit.pci(X, Y)
-
-z = (spread - mean(spread)) / sd(spread)
-</pre>
-
-<h2>Resources</h2>
-
-<p>
-<a href="../reports/partial_cointegration_report.pdf">Project Report (PDF)</a>
+Application of this model in statistical arbitrage:
 </p>
 
 <p>
-<a href="https://github.com/yourrepo">Code Repository</a>
+<a href="../projects/partial-cointegration.html">
+Partial Cointegration Strategy
+</a>
 </p>
+
+
 
 </main>
-<section style="margin-top:60px">
 
-<h2>Discussion</h2>
 
-<p>
-Questions, comments or suggestions are welcome.
-</p>
-
-<script src="https://giscus.app/client.js"
-        data-repo="lorenzo-ai/lorenzo-ai.github.io"
-        data-repo-id="REPO_ID"
-        data-category="General"
-        data-category-id="CATEGORY_ID"
-        data-mapping="pathname"
-        data-theme="dark"
-        crossorigin="anonymous"
-        async>
-</script>
-
-</section>
 
 <footer>
-<p>© 2026 Lorenzo Ognibeni 
-Research Fellow — CNR ISTC</p>
+
+<p>
+© 2026 Lorenzo Ognibeni — Research Fellow, CNR ISTC
+</p>
+
 </footer>
+
 
 </body>
 </html>

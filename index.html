@@ -1,80 +1,318 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
-<title>Signal & Structure — Lorenzo Ognibeni</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Signal & Structure — Lorenzo Ognibeni</title>
+
 <link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+
+<script data-goatcounter="https://lorenzo-ai.goatcounter.com/count"
+async src="//gc.zgo.at/count.js"></script>
+
 </head>
+
 
 <body>
 
+
 <header class="navbar">
-<div class="logo">Signal & Structure</div>
+
+<div class="logo">
+Signal & Structure
+</div>
 
 <nav>
 <a href="projects.html">Projects</a>
-<a href="notes/index.html">Research Notes</a>
+<a href="discussion/index.html">Research Log</a>
 <a href="contact.html">Contact</a>
 </nav>
 
 </header>
 
-<main class="hero">
+
+
+<main>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
 <div class="hero-content">
 
 <h1>Signal & Structure</h1>
 
-<p style="margin-top:10px; color:#6c7a96;">
+<p class="subtitle">
 Lorenzo Ognibeni — Research Fellow, CNR ISTC
 </p>
 
-<h2 style="margin-top:25px;">
+<h2 class="hero-subtitle">
 Modeling Representation, Structure and Risk in Complex Systems
 </h2>
 
 <p>
-I develop representation learning and probabilistic modeling frameworks 
+I develop representation learning and probabilistic modeling frameworks
 to study how complex systems learn, adapt and fail under uncertainty.
 </p>
-<p style="margin-top:25px; color:#6c7a96;">
-        Explore research areas and related projects below.
-        </p>
 
+<div class="hero-links">
 
+<a href="projects.html" class="hero-button">
+Explore Projects
+</a>
+
+<a href="discussion/index.html" class="hero-button alt">
+Research Log
+</a>
 
 </div>
-</main>
+
+</div>
+
+</section>
+
+
+
+<!-- RESEARCH AREAS -->
 
 <section class="focus">
 
-<a href="projects.html#risk" class="focus-link">
+<a href="#risk" class="focus-link">
 <div class="focus-item">
 <h3>Risk & Regime Modeling</h3>
-<p>Bayesian inference, regime dynamics and systemic instability analysis.</p>
+<p>Bayesian inference, regime dynamics and systemic instability.</p>
 </div>
 </a>
 
-<a href="projects.html#representation" class="focus-link">
+<a href="#representation" class="focus-link">
 <div class="focus-item center-focus">
 <h3>Representation Learning</h3>
-<p>Contrastive learning, transformer architectures and geometric analysis.</p>
+<p>Contrastive learning and geometric structure of neural systems.</p>
 </div>
 </a>
 
-<a href="projects.html#causal" class="focus-link">
+<a href="#causal" class="focus-link">
 <div class="focus-item">
 <h3>Causal & Institutional Systems</h3>
-<p>Quasi-experimental design and structural modeling of geopolitical systems.</p>
+<p>Causal inference and structural modeling of complex institutions.</p>
 </div>
 </a>
 
 </section>
 
+
+
+<!-- REPRESENTATION LEARNING -->
+
+<section class="area-block" id="representation">
+
+<h2 class="area-title">Representation Learning</h2>
+
+<div class="area-layout">
+
+
+<div class="projects-column">
+
+<div class="projects-grid">
+
+<a href="projects/neuro-bridge.html" class="project-item">
+<h3>Neuro-Bridge</h3>
+<p>Contrastive manifold learning for neural population activity.</p>
+</a>
+
+<a href="projects/cebra-pipeline.html" class="project-item">
+<h3>CEBRA Pipeline</h3>
+<p>Representation learning and neural decoding.</p>
+</a>
+
+</div>
+
+</div>
+
+
+
+<div class="discussion-column">
+
+<h3 class="discussion-title">
+Research Log <span class="log-note">(comments welcome)</span>
+</h3>
+
+<ul class="research-log">
+
+<li>
+<a href="discussion/neural-representation-geometry.html">
+Geometry of neural representations
+</a>
+</li>
+
+<li>
+<a href="discussion/contrastive-learning-manifolds.html">
+Contrastive learning and manifolds
+</a>
+</li>
+
+<li>
+<a href="discussion/future-neural-embeddings.html">
+Future directions for neural embeddings
+</a>
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- RISK -->
+
+<section class="area-block" id="risk">
+
+<h2 class="area-title">Risk & Regime Modeling</h2>
+
+<div class="area-layout">
+
+
+<div class="projects-column">
+
+<div class="projects-grid">
+
+<a href="projects/systemic-risk.html" class="project-item">
+<h3>Systemic Risk Modeling</h3>
+<p>Probabilistic modeling of financial instability.</p>
+</a>
+
+<a href="projects/partial-cointegration.html" class="project-item">
+<h3>Partial Cointegration</h3>
+<p>State-space models for statistical arbitrage.</p>
+</a>
+
+</div>
+
+</div>
+
+
+
+<div class="discussion-column">
+
+<h3 class="discussion-title">
+Research Log <span class="log-note">(comments welcome)</span>
+</h3>
+
+<ul class="research-log">
+
+<li>
+<a href="notes/partial-cointegration.html">
+Partial Cointegration — model notes
+</a>
+</li>
+
+<li>
+<a href="discussion/regime-dynamics-financial-systems.html">
+Regime dynamics in financial systems
+</a>
+</li>
+
+<li>
+<a href="discussion/systemic-risk-models.html">
+Probabilistic models of systemic instability
+</a>
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- CAUSAL -->
+
+<section class="area-block" id="causal">
+
+<h2 class="area-title">Causal & Institutional Systems</h2>
+
+<div class="area-layout">
+
+
+<div class="projects-column">
+
+<div class="projects-grid">
+
+<a href="projects/geopolitical-risk.html" class="project-item">
+<h3>Geopolitical Risk Modeling</h3>
+<p>Structural models of institutional systems.</p>
+</a>
+
+<a href="projects/policy-evaluation.html" class="project-item">
+<h3>Policy Evaluation</h3>
+<p>Causal inference for economic and policy systems.</p>
+</a>
+
+</div>
+
+</div>
+
+
+
+<div class="discussion-column">
+
+<h3 class="discussion-title">
+Research Log <span class="log-note">(comments welcome)</span>
+</h3>
+
+<ul class="research-log">
+
+<li>
+<a href="discussion/causal-institutional-systems.html">
+Causal inference in institutional systems
+</a>
+</li>
+
+<li>
+<a href="discussion/policy-evaluation-frameworks.html">
+Policy evaluation frameworks
+</a>
+</li>
+
+<li>
+<a href="discussion/institutional-dynamics.html">
+Institutional dynamics and complexity
+</a>
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+
+</main>
+
+
+
 <footer>
-<p>© 2026 Lorenzo Ognibeni — Research Fellow, CNR ISTC</p>
-<p style="color:#6c7a96;">Signal & Structure</p>
+
+<p>
+© 2026 Lorenzo Ognibeni — Research Fellow, CNR ISTC
+</p>
+
 </footer>
+
 
 </body>
 </html>

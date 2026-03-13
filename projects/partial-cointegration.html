@@ -2,126 +2,164 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Partial Cointegration — Lorenzo Ognibeni</title>
+
+<title>Partial Cointegration Strategy — Lorenzo Ognibeni</title>
+
 <link rel="stylesheet" href="../style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+
+<script data-goatcounter="https://lorenzo-ai.goatcounter.com/count"
+async src="//gc.zgo.at/count.js"></script>
+
 </head>
+
 
 <body>
 
 <header class="navbar">
-<div class="logo">Lorenzo Ognibeni</div>
+
+<div class="logo">
+Signal & Structure
+</div>
 
 <nav>
 <a href="../index.html">Home</a>
 <a href="../projects.html">Projects</a>
+<a href="../notes/index.html">Research Notes</a>
 <a href="../contact.html">Contact</a>
 </nav>
 
 </header>
 
-<main class="page-content">
 
-<h1 class="page-title">Partial Cointegration & Statistical Arbitrage</h1>
+
+<main class="project-page">
+
+<h1 class="page-title">
+Partial Cointegration & Statistical Arbitrage
+</h1>
+
+
+<p class="note-meta">
+Research Area: Risk & Regime Modeling<br>
+Date: March 2026
+</p>
+
+
+
+<h2>Overview</h2>
 
 <p>
-This project investigates statistical arbitrage strategies based on 
-<b>partial cointegration</b>, a framework that extends classical 
-cointegration by allowing spreads to contain both a 
-mean-reverting component and a persistent stochastic trend.
+This project evaluates a statistical arbitrage strategy based on
+<b>partial cointegration</b>, a framework allowing financial spreads
+to combine mean-reverting dynamics with a persistent stochastic trend.
 </p>
 
 <p>
-The objective is to evaluate whether partial cointegration models
-provide more robust trading signals than classical Engle–Granger
-cointegration when applied to equity pairs.
+The goal is to assess whether this model produces more robust trading
+signals than classical Engle–Granger cointegration in equity pairs.
 </p>
 
-<h2>Motivation</h2>
 
-<p>
-Traditional pairs trading assumes that spreads are fully mean-reverting.
-However, many empirical spreads exhibit hybrid dynamics combining
-short-term mean reversion with longer-term stochastic drift.
-Partial cointegration models capture this structure by decomposing
-the spread into stationary and non-stationary components.
-</p>
 
-<h2>Model Framework</h2>
-
-<p>
-Under partial cointegration the spread can be represented as
-</p>
-
-<pre>
-W_t = M_t + R_t
-
-M_t = ρ M_{t−1} + ε_t
-R_t = R_{t−1} + η_t
-</pre>
-
-<p>
-where:
-</p>
+<h2>Dataset</h2>
 
 <ul>
-<li><b>M_t</b> is a mean-reverting AR(1) component</li>
-<li><b>R_t</b> is a random walk component</li>
-<li><b>W_t</b> is the observed spread</li>
-</ul>
 
-<p>
-The latent components are estimated through a Kalman filtering approach.
-</p>
-
-<h2>Data & Pair Selection</h2>
-
-<ul>
 <li>S&P 500 equity universe</li>
+
 <li>Daily adjusted prices</li>
-<li>Correlation-based pair screening</li>
+
+<li>Correlation screening for candidate pairs</li>
+
 <li>Cointegration diagnostics</li>
+
 </ul>
+
+
 
 <h2>Trading Strategy</h2>
 
 <p>
-Trading signals are generated from the standardized spread:
+Trading signals are generated using the standardized spread:
 </p>
 
-<pre>
-z_t = (spread_t − μ) / σ
-</pre>
+<div class="equation">
+
+z<sub>t</sub> = (spread<sub>t</sub> − μ) / σ
+
+</div>
 
 <ul>
-<li>Enter positions when |z| exceeds threshold</li>
-<li>Exit when spread reverts toward equilibrium</li>
+
+<li>Enter positions when |z| exceeds a threshold</li>
+
+<li>Close positions when the spread reverts toward equilibrium</li>
+
 <li>Transaction costs and slippage included</li>
+
 </ul>
 
-<h2>Model Comparison</h2>
 
-<p>
-The project compares two modeling frameworks:
-</p>
+
+<h2>Experimental Pipeline</h2>
 
 <ul>
-<li>Engle–Granger Cointegration</li>
-<li>Partial Cointegration (state-space representation)</li>
+
+<li>Pair selection through correlation filtering</li>
+
+<li>Cointegration testing using Engle–Granger</li>
+
+<li>Partial cointegration estimation via state-space model</li>
+
+<li>Signal generation and trading simulation</li>
+
+<li>Performance evaluation (Sharpe ratio, drawdown)</li>
+
 </ul>
 
+
+
+<h2>Results</h2>
+
 <p>
-Performance is evaluated through cumulative returns,
-Sharpe ratio and drawdown statistics.
+The strategy compares classical cointegration signals with signals
+derived from the partial cointegration model.
 </p>
+
+<p>
+Preliminary experiments suggest smoother signals and fewer false
+entries relative to classical cointegration approaches.
+</p>
+
+
+
+<h3>Equity Curve</h3>
+
+<img src="../images/pci_equity.png" alt="PCI vs CI equity curve" class="research-figure">
+
+
+<h3>Spread Dynamics</h3>
+
+<img src="../images/pci_spread.png" alt="Spread dynamics" class="research-figure">
+
+
+<h3>Signal Comparison</h3>
+
+<img src="../images/pci_zscore.png" alt="Z score comparison" class="research-figure">
+
+
 
 <h2>Implementation</h2>
 
 <p>
-The full pipeline is implemented in <b>R</b> using econometric time-series
+The pipeline is implemented in <b>R</b> using econometric time-series
 libraries for cointegration testing, state-space estimation and
-financial performance analysis.
+trading simulation.
 </p>
 
 <pre>
@@ -131,35 +169,49 @@ PCI <- fit.pci(X, Y)
 z = (spread - mean(spread)) / sd(spread)
 </pre>
 
-<h2>Resources</h2>
+
+
+<h2>Technical Background</h2>
 
 <p>
-<a href="../reports/partial_cointegration_report.pdf">Project Report (PDF)</a>
-</p>
-
-<p>
-<a href="https://github.com/yourrepo">Code Repository</a>
-</p>
-
-</main>
-
-<h2>Related Research Note</h2>
-
-<p>
-For a technical discussion of the model and Kalman filtering
-implementation see the note:
+A theoretical discussion of the partial cointegration model and its
+state-space representation is available in the research note:
 </p>
 
 <p>
 <a href="../notes/partial-cointegration.html">
-Partial Cointegration: When Mean-Reversion Is Not Enough
+Partial Cointegration: Model and Kalman Representation
 </a>
 </p>
 
+
+
+<h2>Resources</h2>
+
+<p>
+<a href="../reports/partial_cointegration_report.pdf">
+Project Report (PDF)
+</a>
+</p>
+
+<p>
+Code available upon request.
+</p>
+
+
+
+</main>
+
+
+
 <footer>
-<p>© 2026 Lorenzo Ognibeni 
-Research Fellow — CNR ISTC</p>
+
+<p>
+© 2026 Lorenzo Ognibeni — Research Fellow, CNR ISTC
+</p>
+
 </footer>
+
 
 </body>
 </html>
