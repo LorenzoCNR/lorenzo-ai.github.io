@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>NeuroBridge — Lorenzo Ognibeni</title>
+
+        <link rel="stylesheet" href="../style.css">
+
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Baskerville:wght@400;700&display=swap"
+                rel="stylesheet">
+
+        <script data-goatcounter="https://lorenzo-ai.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+</head>
+
+
+<body>
+
+        <header class="navbar">
+
+                <div class="logo">
+                        Signal & Structure
+                </div>
+
+                <nav>
+                        <a href="../index.html">Home</a>
+                        <a href="../projects.html">Projects</a>
+                        <a href="../notes/index.html">Research Log</a>
+                        <a href="../contact.html">Contact</a>
+                </nav>
+
+        </header>
+
+
+
+        <main class="project-page">
+
+                <h1 class="page-title">
+                        NeuroBridge
+                </h1>
+
+
+                <div class="project-meta">
+                        <span class="area-badge">Representation Learning</span>
+                        <span class="area-badge">2025-2026</span>
+                        <span class="status-badge">Active Research Framework</span>
+                </div>
+
+
+
+                <h2>Overview</h2>
+
+                <p>
+                        NeuroBridge is a modular research framework for neural representation learning.
+                        It is designed to study latent structure, temporal dynamics and behavioral
+                        information in neural population activity.
+                </p>
+
+                <p>
+                        The framework connects data preparation, contrastive sampling, deep neural
+                        encoders, self-supervised objectives, latent-variable simulation, decoding
+                        probes and manifold visualization.
+                </p>
+
+                <p>
+                        The goal is not only to generate embeddings, but to build a controlled research
+                        pipeline for testing what neural representations preserve: time, trial
+                        structure, labels, behavior, latent dynamics and cross-subject consistency.
+                </p>
+
+
+
+                <h2>Problem</h2>
+
+                <p>
+                        Neural data are high-dimensional, noisy and temporally structured. A central
+                        problem is to understand whether low-dimensional embeddings capture meaningful
+                        structure rather than only producing visually appealing manifolds.
+                </p>
+
+                <p>
+                        NeuroBridge addresses this by making the representation-learning pipeline
+                        explicit: data are windowed, metadata are tracked, distances and similarities
+                        are constructed, encoders are trained and embeddings are evaluated through
+                        decoding, simulation and visualization.
+                </p>
+
+
+
+                <h2>Framework Architecture</h2>
+
+                <p>
+                        The project is organized as a modular pipeline rather than as a single
+                        monolithic script.
+                </p>
+
+                <ul>
+
+                        <li>
+                                <b>Data layer:</b> loading, preprocessing and formatting of neural and EEG data.
+                        </li>
+
+                        <li>
+                                <b>Simulation layer:</b> latent trajectory generation, spike emission models and
+                                synthetic neural data.
+                        </li>
+
+                        <li>
+                                <b>Sampling layer:</b> temporal windows, trial-aware metadata, label distances and
+                                similarity matrices.
+                        </li>
+
+                        <li>
+                                <b>Model layer:</b> linear baselines, CEBRA-style adapters and deep neural encoders.
+                        </li>
+
+                        <li>
+                                <b>Learning layer:</b> self-supervised, contrastive and metric-learning objectives.
+                        </li>
+
+                        <li>
+                                <b>Evaluation layer:</b> decoding probes, latent recovery, consistency checks and
+                                model-selection utilities.
+                        </li>
+
+                        <li>
+                                <b>Visualization layer:</b> manifold plots, trajectory visualization, embedding
+                                diagnostics and video generation.
+                        </li>
+
+                </ul>
+
+
+
+                <h2>Technologies and Implementation Stack</h2>
+
+                <ul>
+
+                        <li>
+                                <b>Python</b> as the main programming language for the research framework.
+                        </li>
+
+                        <li>
+                                <b>PyTorch</b> for neural encoders, training loops, tensor operations and GPU-based deep learning experiments.
+                        </li>
+
+                        <li>
+                                <b>NumPy / pandas</b> for numerical computation, data handling and intermediate array manipulation.
+                        </li>
+
+                        <li>
+                                <b>scikit-learn</b> for baseline models, PCA, kNN decoding and model-selection utilities.
+                        </li>
+
+                        <li>
+                                <b>CEBRA</b> as an external reference method integrated through adapter-style workflows for neural representation learning.
+                        </li>
+
+                        <li>
+                                <b>Matplotlib</b> for manifold plots, diagnostics and trajectory visualization.
+                        </li>
+
+                        <li>
+                                <b>YAML / configuration files</b> for reproducible experiment setup and project-level parameter control.
+                        </li>
+
+                </ul>
+
+
+
+                <h2>Example Workflow</h2>
+
+                <p>
+                        A typical NeuroBridge workflow can be summarized as:
+                </p>
+
+                <div class="pipeline">
+                        <div class="pipeline-step">Raw neural data</div>
+                        <div class="pipeline-arrow">↓</div>
+                        <div class="pipeline-step">Preprocessing &amp; trial formatting</div>
+                        <div class="pipeline-arrow">↓</div>
+                        <div class="pipeline-step">Temporal window construction</div>
+                        <div class="pipeline-arrow">↓</div>
+                        <div class="pipeline-step">Metadata extraction: time, trial, label, condition</div>
+                        <div class="pipeline-arrow">↓</div>
+                        <div class="pipeline-step">Distance &amp; similarity construction</div>
+                        <div class="pipeline-arrow">↓</div>
+                        <div class="pipeline-step">Deep encoder training &mdash; self-supervised / contrastive</div>
+                        <div class="pipeline-arrow">↓</div>
+                        <div class="pipeline-step">Embedding generation</div>
+                        <div class="pipeline-arrow">↓</div>
+                        <div class="pipeline-step">Decoding &amp; diagnostic evaluation</div>
+                        <div class="pipeline-arrow">↓</div>
+                        <div class="pipeline-step pipeline-step--last">Manifold visualization</div>
+                </div>
+
+
+
+
+                <h2>Deep Learning and Model Layer</h2>
+
+                <p>
+                        Deep learning enters NeuroBridge through neural encoders that map windowed
+                        neural activity into low-dimensional embeddings:
+                </p>
+
+                <pre>
+X_window → fθ(X_window) → z
+</pre>
+
+                <p>
+                        Here, <b>X_window</b> is a temporal window of neural activity, <b>fθ</b> is a
+                        learned encoder and <b>z</b> is the resulting latent representation.
+                </p>
+
+                <p>
+                        This makes NeuroBridge broader than a single contrastive-learning experiment:
+                        contrastive learning is one training paradigm inside a wider deep
+                        representation-learning framework.
+                </p>
+
+
+
+                <h2>Core Learning Paradigms</h2>
+
+                <ul>
+
+                        <li>
+                                <b>Representation learning:</b> learning compact embeddings of neural population
+                                activity.
+                        </li>
+
+                        <li>
+                                <b>Self-supervised learning:</b> using temporal, behavioral, trial-derived or
+                                label-derived structure as training signal.
+                        </li>
+
+                        <li>
+                                <b>Contrastive learning:</b> training embeddings so that similar neural windows are
+                                close and dissimilar windows are separated.
+                        </li>
+
+                        <li>
+                                <b>Metric / similarity learning:</b> constructing explicit distance and similarity
+                                matrices from metadata such as time, labels, trials or conditions.
+                        </li>
+
+                        <li>
+                                <b>Neural time-series modeling:</b> using temporal windows and sequence-aware encoders
+                                to capture local or long-range neural dynamics.
+                        </li>
+
+                        <li>
+                                <b>Latent-variable modeling:</b> modeling neural activity through hidden trajectories
+                                and emission processes.
+                        </li>
+
+                </ul>
+
+
+
+                <h2>Model Families</h2>
+
+                <p>
+                        The model layer is designed to compare simple baselines, deep neural encoders,
+                        contrastive objectives and latent-variable components within the same
+                        evaluation pipeline.
+                </p>
+
+
+
+                <h3>Current / Core Models</h3>
+
+
+                <div class="model-group">
+                <ul>
+
+                        <li>
+                                <b>PCA baseline:</b> linear dimensionality reduction used as an interpretable reference
+                                model.
+                        </li>
+
+                        <li>
+                                <b>CEBRA-style adapter:</b> integration layer for comparing CEBRA-oriented embeddings
+                                with custom encoders and baseline dimensionality-reduction methods.
+                        </li>
+
+                        <li>
+                                <b>Temporal CNN encoder:</b> deep neural encoder for extracting local temporal patterns
+                                from windowed neural activity.
+                        </li>
+
+                        <li>
+                                <b>MLP encoder:</b> nonlinear baseline for flattened neural windows.
+                        </li>
+
+                        <li>
+                                <b>Latent neural generator:</b> generative component for simulating latent trajectories
+                                and spike observations.
+                        </li>
+
+                </ul>
+                </div>
+
+
+
+
+                <h3>Experimental / Legacy Models</h3>
+
+                <p>
+                        The broader research codebase also contains earlier or experimental components
+                        that informed the current NeuroBridge design.
+                </p>
+
+
+                <div class="model-group">
+                <ul>
+
+                        <li>
+                                <b>EEGNet-style architectures:</b> compact convolutional models for EEG/BCI
+                                classification experiments.
+                        </li>
+
+                        <li>
+                                <b>Shallow and deep convolutional networks:</b> baseline architectures for neural signal
+                                classification.
+                        </li>
+
+                        <li>
+                                <b>Recurrent models:</b> LSTM-style components for temporal neural or EEG sequences.
+                        </li>
+
+                        <li>
+                                <b>VAE-style models:</b> experimental latent-variable models for nonlinear
+                                representation and generative modeling.
+                        </li>
+
+                        <li>
+                                <b>Weighted contrastive encoders:</b> earlier contrastive-learning experiments using
+                                pairwise weights and similarity structure.
+                        </li>
+
+                </ul>
+                </div>
+
+
+
+
+                <h3>Planned Extensions</h3>
+
+
+                <div class="model-group">
+                <ul>
+
+                        <li>
+                                <b>Transformer encoder:</b> planned extension for longer-range temporal dependencies and
+                                attention-based sequence representation.
+                        </li>
+
+                        <li>
+                                <b>GRU / recurrent encoder:</b> lighter recurrent alternative for sequential neural
+                                activity.
+                        </li>
+
+                        <li>
+                                <b>Probabilistic latent dynamics:</b> extensions toward state-space, GPFA-like or
+                                LFADS-like latent temporal models.
+                        </li>
+
+                        <li>
+                                <b>Deep generative models:</b> extensions for nonlinear latent dynamics and neural data
+                                generation.
+                        </li>
+
+                        <li>
+                                <b>Cross-subject alignment models:</b> methods for comparing embeddings across subjects,
+                                sessions or interacting agents.
+                        </li>
+
+                </ul>
+                </div>
+
+
+
+
+                <h2>Implemented Elements</h2>
+
+                <ul>
+
+                        <li>Window-based construction of neural samples from trial-structured data.</li>
+
+                        <li>Metadata tracking for local time, global time, trial identity and labels.</li>
+
+                        <li>Pairwise temporal-distance and label-distance construction.</li>
+
+                        <li>Combination of multiple distance matrices through weighted aggregation.</li>
+
+                        <li>Conversion of distance matrices into similarity targets.</li>
+
+                        <li>CEBRA-oriented representation learning workflows.</li>
+
+                        <li>Latent trajectory simulation for synthetic neural data.</li>
+
+                        <li>Spike emission modeling through latent-to-rate and rate-to-count transformations.</li>
+
+                        <li>kNN-based decoding probes for behavioral or positional variables.</li>
+
+                        <li>Embedding and manifold visualization utilities.</li>
+
+                </ul>
+
+
+
+                <h2>Evaluation and Diagnostics</h2>
+
+                <p>
+                        NeuroBridge treats decoding and visualization as diagnostic tools rather than
+                        as isolated final outputs.
+                </p>
+
+                <ul>
+
+                        <li>
+                                <b>Decoding probes:</b> assess whether embeddings preserve behavioral variables such as
+                                position, direction or trial condition.
+                        </li>
+
+                        <li>
+                                <b>Latent recovery:</b> compare learned embeddings with known latent variables in
+                                synthetic simulations.
+                        </li>
+
+                        <li>
+                                <b>Similarity diagnostics:</b> inspect whether the learned geometry reflects time,
+                                labels, trials or conditions.
+                        </li>
+
+                        <li>
+                                <b>Manifold visualization:</b> plot trajectories, condition averages and low-dimensional
+                                embeddings.
+                        </li>
+
+                        <li>
+                                <b>Cross-subject comparison:</b> evaluate consistency or coupling between
+                                representations from different subjects.
+                        </li>
+
+                </ul>
+
+
+
+                <h2>Methodological Note</h2>
+
+                <p>
+                        The central idea of NeuroBridge is that representation learning should be
+                        tested through explicit structure: metadata, distances, similarities, decoding
+                        and controlled simulations.
+                </p>
+
+                <p>
+                        This avoids treating embeddings as black-box visual objects. Instead, the
+                        framework asks what information the representation preserves, what geometry it
+                        induces and whether that geometry is scientifically meaningful.
+                </p>
+
+
+
+                <h2>Current Limitations</h2>
+
+                <p>
+                        NeuroBridge is an active research framework and not yet a polished software
+                        package.
+                </p>
+
+                <ul>
+
+                        <li>Some modules are still experimental or under refactoring.</li>
+
+                        <li>Several model families are planned but not yet fully integrated.</li>
+
+                        <li>Evaluation protocols need to be standardized across datasets and tasks.</li>
+
+                        <li>Cross-subject and cross-session validation remains an active development area.</li>
+
+                        <li>Documentation and reproducible experiment configuration are still being consolidated.</li>
+
+                </ul>
+
+
+
+                <h2>Research Direction</h2>
+
+                <p>
+                        The long-term direction is to turn NeuroBridge into a controlled framework for
+                        neural representation learning, synthetic data generation and cross-subject
+                        comparison.
+                </p>
+
+                <ul>
+
+                        <li>Develop stronger encoder families for neural time series.</li>
+
+                        <li>Compare contrastive, generative and probabilistic latent models.</li>
+
+                        <li>Use synthetic data to validate whether learned embeddings recover known structure.</li>
+
+                        <li>Evaluate embeddings through decoding, stability and cross-subject consistency.</li>
+
+                        <li>Connect neural manifold learning with broader questions in representation learning and
+                                complex systems.</li>
+
+                </ul>
+
+
+
+                <h2>Resources</h2>
+
+                <p>
+                        Technical report in preparation.
+                </p>
+
+                <p>
+                        Code available upon request.
+                </p>
+
+
+
+                <h2>Technical Context</h2>
+
+                <ul>
+
+                        <li>
+                                Schneider, Lee & Mathis (2023), <i>CEBRA</i> — relevant as a contrastive
+                                learning framework for behavioral and neural data.
+                        </li>
+
+                        <li>
+                                Pandarinath et al. (2018), <i>LFADS</i> — relevant to latent dynamical modeling
+                                of neural population activity.
+                        </li>
+
+                        <li>
+                                Yu et al. (2009), <i>Gaussian-process factor analysis</i> — relevant to
+                                probabilistic latent trajectories in neural data.
+                        </li>
+
+                        <li>
+                                van der Maaten & Hinton (2008), <i>t-SNE</i>, and McInnes et al. (2018),
+                                <i>UMAP</i> — relevant as nonlinear dimensionality-reduction references for
+                                visualizing high-dimensional structure.
+                        </li>
+
+                </ul>
+
+
+
+        </main>
+
+
+
+        <footer>
+
+                <p>
+                        © 2026 Lorenzo Ognibeni — Research Fellow, CNR ISTC
+                </p>
+
+        </footer>
+
+
+</body>
+
+</html>

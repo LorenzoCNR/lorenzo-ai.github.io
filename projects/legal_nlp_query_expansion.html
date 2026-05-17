@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Legal NLP & Query Expansion — Lorenzo Ognibeni</title>
+
+<meta name="description" content="Seed-based NLP prototype for legal document retrieval and query expansion using TF-IDF, cosine similarity and static word embeddings.">
+
+<link rel="stylesheet" href="../style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+
+<script data-goatcounter="https://lorenzo-ai.goatcounter.com/count"
+async src="//gc.zgo.at/count.js"></script>
+
+</head>
+
+
+<body>
+
+<header class="navbar">
+
+<div class="logo">
+Signal & Structure
+</div>
+
+<nav>
+<a href="../index.html">Home</a>
+<a href="../projects.html">Projects</a>
+<a href="../notes/index.html">Research Log</a>
+<a href="../contact.html">Contact</a>
+</nav>
+
+</header>
+
+
+
+<main class="project-page">
+
+<h1 class="page-title">
+Legal NLP & Query Expansion
+</h1>
+
+
+<div class="project-meta">
+        <span class="area-badge">NLP &amp; Text Representation</span>
+        <span class="area-badge">2021</span>
+        <span class="status-badge">Applied Prototype</span>
+</div>
+
+
+
+<h2>Overview</h2>
+
+<p>
+This project developed a seed-based NLP prototype for legal document retrieval
+and terminology expansion.
+</p>
+
+<p>
+The work started from a small set of manually selected legal terms, used them
+to retrieve candidate documents, extracted additional relevant terms from those
+documents and explored whether lexical and semantic similarity could support
+document-concept assignment.
+</p>
+
+<p>
+The project was not designed as a production legal search engine. It was an
+applied methodological prototype for working with specialized legal text.
+</p>
+
+
+
+<h2>Problem</h2>
+
+<p>
+Legal concepts are often expressed through multiple related terms. A narrow
+query can miss relevant documents if the corpus uses alternative terminology.
+</p>
+
+<p>
+The practical question was whether a small initial vocabulary could be expanded
+using information contained in the corpus itself.
+</p>
+
+
+
+<h2>Example 1 — Seed-Based Retrieval</h2>
+
+<p>
+One initial conceptual area was represented by the seed terms:
+</p>
+
+<pre>
+murder kill gun
+</pre>
+
+<p>
+The prototype used these terms to identify legal documents related to the same
+conceptual area. Documents were represented through TF-IDF-style lexical scores
+and compared with the query using cosine similarity.
+</p>
+
+
+
+<h2>Example 2 — Query Expansion</h2>
+
+<p>
+A second conceptual area was represented by:
+</p>
+
+<pre>
+debt mortgage money
+</pre>
+
+<p>
+After retrieving candidate documents, the prototype extracted high-scoring
+terms from the selected subset. These terms were treated as possible additions
+to the original query vocabulary.
+</p>
+
+<p>
+The logic was iterative: start from a narrow concept, retrieve documents,
+extract candidate terms and use those terms to enrich the conceptual
+vocabulary.
+</p>
+
+
+
+<h2>Technologies and Methods Used</h2>
+
+<ul>
+
+<li><b>Python</b> for prototype implementation.</li>
+
+<li><b>NLTK</b> for tokenization and basic text preprocessing.</li>
+
+<li><b>NumPy / pandas</b> for intermediate document-term structures and data handling.</li>
+
+<li><b>TF-IDF-style scoring</b> for sparse lexical representation of terms and documents.</li>
+
+<li><b>Cosine similarity</b> for query-document ranking and term/document comparison.</li>
+
+<li><b>GloVe embeddings</b> for exploratory word-level semantic similarity.</li>
+
+<li><b>Seed-based query expansion</b> to enrich manually defined concept vocabularies.</li>
+
+</ul>
+
+
+
+<h2>Implemented Elements</h2>
+
+<ul>
+
+<li>Filtering of legal documents using initial seed terms.</li>
+
+<li>Tokenization and basic preprocessing of legal text.</li>
+
+<li>TF-IDF-style term scoring.</li>
+
+<li>Cosine-similarity ranking between queries and documents.</li>
+
+<li>Similarity-threshold selection of candidate documents.</li>
+
+<li>Extraction of high-scoring terms for query expansion.</li>
+
+<li>Exploratory semantic similarity using static word embeddings.</li>
+
+<li>Score-based assignment of documents to conceptual classes.</li>
+
+</ul>
+
+
+
+<h2>Internal Scores and Evaluation Limits</h2>
+
+<p>
+The prototype included internal relevance scores: TF-IDF weights, cosine
+similarity values, ranked document scores and embedding-based concept scores.
+These measures were useful for exploration, ranking and candidate term
+selection.
+</p>
+
+<p>
+They should not be interpreted as a complete external validation. A full
+evaluation would require annotated relevance judgments and standard retrieval
+metrics.
+</p>
+
+<ul>
+
+<li><b>Already present:</b> internal scoring, ranking and threshold-based document selection.</li>
+
+<li><b>To be added:</b> Precision@k, Recall@k, Mean Reciprocal Rank and nDCG for retrieval quality.</li>
+
+<li><b>To be added:</b> expert validation of candidate expansion terms.</li>
+
+<li><b>To be added:</b> checks for semantic drift across expansion cycles.</li>
+
+</ul>
+
+
+
+<h2>Methodological Note</h2>
+
+<p>
+The iterative structure of the prototype is useful but also risky. If the
+system repeatedly expands a query using terms extracted from previously
+retrieved documents, the process can become circular and may drift away from
+the original legal concept.
+</p>
+
+<p>
+For this reason, query expansion should be controlled through external
+validation, expert review or comparison against a labeled benchmark.
+</p>
+
+
+
+<h2>Modern Extension</h2>
+
+<p>
+The original prototype used sparse lexical scoring, cosine similarity and
+static word embeddings. A modern version would evaluate the same idea against
+current retrieval methods.
+</p>
+
+<ul>
+
+<li>Use BM25 as a stronger sparse-retrieval baseline.</li>
+
+<li>Use sentence embeddings for document-level semantic search.</li>
+
+<li>Compare sparse, dense and hybrid retrieval strategies.</li>
+
+<li>Add reranking for the top retrieved documents.</li>
+
+<li>Evaluate retrieval quality with annotated relevance judgments.</li>
+
+</ul>
+
+
+
+<h2>Resources</h2>
+
+<p>
+Technical report in preparation.
+</p>
+
+<p>
+Code available upon request.
+</p>
+
+
+
+<h2>Technical Context</h2>
+
+<ul>
+
+<li>
+Pennington, Socher & Manning (2014), <i>GloVe</i> — relevant to the original
+prototype because static word embeddings were used for exploratory semantic
+similarity.
+</li>
+
+<li>
+Reimers & Gurevych (2019), <i>Sentence-BERT</i> — relevant as a modern
+document/sentence embedding alternative to word-level static embeddings.
+</li>
+
+<li>
+Thakur et al. (2021), <i>BEIR</i> — relevant as a modern framework for
+evaluating retrieval systems across heterogeneous datasets.
+</li>
+
+</ul>
+
+
+
+</main>
+
+
+
+<footer>
+
+<p>
+© 2026 Lorenzo Ognibeni — Research Fellow, CNR ISTC
+</p>
+
+</footer>
+
+
+</body>
+</html>

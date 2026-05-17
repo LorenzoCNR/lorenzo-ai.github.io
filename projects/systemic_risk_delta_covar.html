@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Systemic Risk & Rolling Delta CoVaR — Lorenzo Ognibeni</title>
+
+<meta name="description" content="Rolling Delta CoVaR implementation in MATLAB for estimating institutional contributions to systemic risk through quantile regression.">
+
+<link rel="stylesheet" href="../style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+
+<script data-goatcounter="https://lorenzo-ai.goatcounter.com/count"
+async src="//gc.zgo.at/count.js"></script>
+
+</head>
+
+
+<body>
+
+<header class="navbar">
+
+<div class="logo">
+Signal & Structure
+</div>
+
+<nav>
+<a href="../index.html">Home</a>
+<a href="../projects.html">Projects</a>
+<a href="../notes/index.html">Research Log</a>
+<a href="../contact.html">Contact</a>
+</nav>
+
+</header>
+
+
+
+<main class="project-page">
+
+<h1 class="page-title">
+Systemic Risk & Rolling Delta CoVaR
+</h1>
+
+
+<div class="project-meta">
+<span class="area-badge">Finance, Risk &amp; Regime Modeling</span>
+<span class="area-badge">2020</span>
+<span class="status-badge">Systemic Risk Prototype</span>
+</div>
+
+
+
+<h2>Overview</h2>
+
+<p>
+This project implemented a rolling Delta CoVaR procedure in MATLAB for
+estimating the contribution of individual financial institutions to systemic
+risk.
+</p>
+
+<p>
+The model follows the CoVaR logic: systemic risk is measured by the conditional
+value-at-risk of the financial system when a given institution is in distress,
+and the institution's marginal contribution is measured relative to its median
+state.
+</p>
+
+<p>
+The key implementation contribution was extending the static Delta CoVaR logic
+into a rolling estimation framework, so that systemic-risk contributions could
+be tracked over time across multiple institutions.
+</p>
+
+
+
+<h2>Problem</h2>
+
+<p>
+Traditional risk metrics often focus on the standalone risk of a financial
+institution. Systemic-risk analysis asks a different question: how much does
+the system become exposed when a specific institution enters a distress state?
+</p>
+
+<p>
+The goal was to estimate time-varying systemic-risk contributions using
+institution-level returns, system returns and lagged state variables.
+</p>
+
+
+
+<h2>Model Idea</h2>
+
+<p>
+The Delta CoVaR measure compares two conditional states:
+</p>
+
+<pre>
+CoVaR(system | institution in distress)
+-
+CoVaR(system | institution in median state)
+</pre>
+
+<p>
+Institutional distress was estimated through quantile regression at the lower
+tail, while the normal benchmark was estimated at the median. The system's
+conditional tail response was then estimated by regressing system returns on
+the institution's returns and lagged state variables.
+</p>
+
+
+
+<h2>Rolling Estimation</h2>
+
+<p>
+The implemented procedure recalculated Delta CoVaR over time. For each
+institution, the model used expanding or rolling historical windows, estimated
+the relevant quantile-regression equations and updated the institution's
+systemic-risk contribution at regular steps.
+</p>
+
+<pre>
+for each institution:
+  for each estimation date:
+    estimate median state of institution
+    estimate distress state of institution
+    estimate system tail regression
+    compute rolling Delta CoVaR
+</pre>
+
+<p>
+This made it possible to inspect whether each institution's contribution to
+systemic risk was stable, increasing or concentrated during stress periods.
+</p>
+
+
+
+<h2>Implemented Elements</h2>
+
+<ul>
+<li>MATLAB implementation of rolling Delta CoVaR calculation.</li>
+<li>Quantile regression for median and distress-state estimation.</li>
+<li>Institution-by-institution systemic-risk contribution estimates.</li>
+<li>Use of lagged state variables as conditioning information.</li>
+<li>Rolling updates across the sample rather than a single static estimate.</li>
+<li>Matrix output of time-varying Delta CoVaR values.</li>
+<li>Comparison between institution distress state and median benchmark state.</li>
+</ul>
+
+
+
+<h2>Technical Logic</h2>
+
+<p>
+The rolling procedure first estimated the institution's median state:
+</p>
+
+<pre>
+institution_return = alpha + beta * lagged_state_variables
+quantile = 0.50
+</pre>
+
+<p>
+It then estimated the institution's distress state:
+</p>
+
+<pre>
+institution_return = alpha + beta * lagged_state_variables
+quantile = 0.05
+</pre>
+
+<p>
+Finally, it estimated the system's conditional tail behavior:
+</p>
+
+<pre>
+system_return =
+  alpha
+  + gamma * institution_return
+  + beta * lagged_state_variables
+</pre>
+
+<p>
+Delta CoVaR was computed from the difference between the institution's
+distress and median states, scaled by the system regression coefficient on the
+institution.
+</p>
+
+
+
+<h2>Outputs</h2>
+
+<p>
+The model produced rolling Delta CoVaR estimates for multiple institutions,
+allowing comparison of systemic-risk contributions through time.
+</p>
+
+<p>
+The output can be interpreted as a time-varying systemic-risk diagnostic: it
+does not say only which institution is risky in isolation, but which
+institution is associated with larger deterioration in the system's lower-tail
+state.
+</p>
+
+
+
+<h2>Evaluation Limits</h2>
+
+<p>
+Delta CoVaR is sensitive to modeling choices and should be interpreted as a
+systemic-risk indicator rather than as a complete causal measure of contagion.
+</p>
+
+<ul>
+<li><b>Quantile choice:</b> results depend on the selected distress threshold.</li>
+<li><b>Window design:</b> rolling estimates depend on window length and update frequency.</li>
+<li><b>State variables:</b> omitted conditioning variables can affect estimated contributions.</li>
+<li><b>Tail estimation:</b> lower-tail regressions can be unstable in small samples.</li>
+<li><b>Causality:</b> CoVaR captures conditional tail association, not automatic causal transmission.</li>
+</ul>
+
+
+
+<h2>Modern Extension</h2>
+
+<p>
+A modern version of the project would turn the procedure into a reusable
+systemic-risk module and expand the validation framework.
+</p>
+
+<ul>
+<li>Compare rolling-window and expanding-window estimates.</li>
+<li>Add bootstrap confidence intervals for Delta CoVaR paths.</li>
+<li>Compare CoVaR with marginal expected shortfall and systemic expected shortfall.</li>
+<li>Run robustness checks across quantiles, state variables and stress periods.</li>
+<li>Port the implementation to Python with reproducible notebooks and tests.</li>
+<li>Visualize institution rankings and time-varying risk contributions.</li>
+</ul>
+
+
+
+<h2>Technologies and Methods Used</h2>
+
+<ul>
+<li><b>MATLAB</b> for implementation and matrix-based computation.</li>
+<li><b>Quantile regression</b> for tail and median-state estimation.</li>
+<li><b>Delta CoVaR</b> for institutional systemic-risk contribution measurement.</li>
+<li><b>Rolling-window estimation</b> for time-varying risk diagnostics.</li>
+<li><b>Financial returns</b> for institution and system-level risk inputs.</li>
+<li><b>Lagged state variables</b> for conditional systemic-risk modeling.</li>
+</ul>
+
+
+
+<h2>Resources</h2>
+
+<p>
+Code and raw financial data are not public.
+</p>
+
+<p>
+An anonymized technical note can be prepared upon request.
+</p>
+
+
+
+<h2>Technical Context</h2>
+
+<ul>
+<li>Adrian and Brunnermeier's CoVaR framework for systemic-risk measurement.</li>
+<li>Quantile regression for conditional tail-risk estimation.</li>
+<li>Systemic-risk analytics literature on financial institutions and tail dependence.</li>
+</ul>
+
+
+
+</main>
+
+
+
+<footer>
+
+<p>
+© 2026 Lorenzo Ognibeni — Research Fellow, CNR ISTC
+</p>
+
+</footer>
+
+
+</body>
+</html>

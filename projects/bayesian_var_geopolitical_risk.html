@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bayesian VAR & Institutional Shocks — Lorenzo Ognibeni</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+
+<script data-goatcounter="https://lorenzo-ai.goatcounter.com/count"
+async src="//gc.zgo.at/count.js"></script>
+
+</head>
+
+
+<body>
+
+<header class="navbar">
+
+<div class="logo">
+Signal & Structure
+</div>
+
+<nav>
+<a href="../index.html">Home</a>
+<a href="../projects.html">Projects</a>
+<a href="../notes/index.html">Research Log</a>
+<a href="../contact.html">Contact</a>
+</nav>
+
+</header>
+
+
+
+<main class="project-page">
+
+<h1 class="page-title">
+Bayesian VAR & Institutional Shocks
+</h1>
+
+
+<div class="project-meta">
+<span class="area-badge">Causal &amp; Institutional Systems</span>
+<span class="area-badge">2018</span>
+<span class="status-badge">Applied Econometrics Prototype</span>
+</div>
+
+
+
+<h2>Overview</h2>
+
+<p>
+This project studies the transmission of institutional and geopolitical
+uncertainty shocks using Bayesian vector autoregressive models.
+</p>
+
+<p>
+The work combines geopolitical-risk indicators, policy-uncertainty measures
+and macroeconomic variables to analyze how institutional shocks propagate
+through economic systems.
+</p>
+
+<p>
+The project should be read as an applied Bayesian econometrics prototype for
+scenario interpretation and institutional shock analysis, not as a production
+forecasting system.
+</p>
+
+
+
+<h2>Problem</h2>
+
+<p>
+Geopolitical events can affect policy uncertainty, macroeconomic expectations,
+investment decisions and institutional behavior. These effects are dynamic:
+they unfold over time and may differ across countries, variables and regimes.
+</p>
+
+<p>
+The goal of the project was to use a Bayesian time-series framework to study
+how macroeconomic and institutional variables respond to uncertainty shocks.
+</p>
+
+
+
+<h2>Model Idea</h2>
+
+<p>
+The central model is a Bayesian VAR, where a vector of macroeconomic
+variables is modeled as a function of its own lags:
+</p>
+
+<pre>
+Y_t = A_1 Y_{t-1} + ... + A_p Y_{t-p} + ε_t
+</pre>
+
+<p>
+In a Bayesian VAR, prior assumptions are introduced to regularize the model,
+especially when the number of variables and lags increases relative to the
+available sample size.
+</p>
+
+<p>
+Impulse response functions are then used to study how the system reacts after a
+institutional or geopolitical uncertainty shock.
+</p>
+
+
+
+<h2>Data and Variables</h2>
+
+<p>
+The project used macroeconomic time series and uncertainty indicators related
+to geopolitical events and economic policy.
+</p>
+
+<ul>
+
+<li>Geopolitical risk indicators.</li>
+
+<li>Economic policy uncertainty indicators.</li>
+
+<li>Macroeconomic variables such as output, prices or activity indicators.</li>
+
+<li>Institutional or policy-relevant indicators such as uncertainty and activity measures.</li>
+
+<li>Country-level datasets for comparative macro-financial analysis.</li>
+
+</ul>
+
+
+
+<h2>Example — Shock Transmission</h2>
+
+<p>
+A typical analysis asks how the system reacts after an increase in geopolitical
+risk.
+</p>
+
+<pre>
+Geopolitical-risk shock
+        ↓
+Bayesian VAR / structural VAR
+        ↓
+Impulse response functions
+        ↓
+Dynamic response of macro-financial variables
+</pre>
+
+<p>
+The focus is not only on whether a variable reacts, but also on the timing,
+persistence and sign of the response.
+</p>
+
+
+
+<h2>Technologies and Methods Used</h2>
+
+<ul>
+
+<li><b>MATLAB</b> for model implementation, estimation and impulse-response analysis.</li>
+
+<li><b>Bayesian VAR</b> for regularized multivariate time-series modeling.</li>
+
+<li><b>Structural VAR logic</b> for shock interpretation and dynamic transmission analysis.</li>
+
+<li><b>Minnesota-style prior</b> for shrinkage and stabilization of VAR parameters.</li>
+
+<li><b>Impulse Response Functions</b> for tracing the effects of geopolitical-risk shocks over time.</li>
+
+<li><b>Macro-financial time-series preprocessing</b> for aligning variables, transformations and sample periods.</li>
+
+<li><b>Scenario interpretation</b> for connecting model outputs to risk and policy narratives.</li>
+
+</ul>
+
+
+
+<h2>Implemented Elements</h2>
+
+<ul>
+
+<li>Preparation and alignment of macro-financial time series.</li>
+
+<li>Construction of VAR input matrices.</li>
+
+<li>Bayesian VAR estimation with shrinkage priors.</li>
+
+<li>Shock-response analysis through impulse response functions.</li>
+
+<li>Comparison of responses across macroeconomic and financial variables.</li>
+
+<li>Graphical output of dynamic responses after geopolitical-risk shocks.</li>
+
+<li>Interpretation of results in a macro-financial risk framework.</li>
+
+</ul>
+
+
+
+<h2>Outputs</h2>
+
+<p>
+The project produced impulse-response figures and model outputs describing how
+selected variables respond to geopolitical-risk shocks over time.
+</p>
+
+<p>
+These outputs are useful for scenario analysis, risk interpretation and
+macroeconomic discussion, but they depend on model specification, variable
+selection and identification assumptions.
+</p>
+
+
+
+<h2>Evaluation Limits</h2>
+
+<p>
+The project provides a structured econometric analysis of geopolitical-risk
+transmission, but several points require caution.
+</p>
+
+<ul>
+
+<li><b>Identification:</b> impulse responses depend on the assumed shock-identification strategy.</li>
+
+<li><b>Sample sensitivity:</b> results may vary across countries, periods and variable transformations.</li>
+
+<li><b>Prior sensitivity:</b> Bayesian VAR estimates depend on prior specification and shrinkage strength.</li>
+
+<li><b>Model uncertainty:</b> alternative lag lengths, variables or ordering assumptions may change the results.</li>
+
+<li><b>Forecasting:</b> the project is primarily a shock-analysis and scenario tool, not a fully validated forecasting engine.</li>
+
+</ul>
+
+
+
+<h2>Methodological Note</h2>
+
+<p>
+The value of the project lies in combining Bayesian econometrics with risk
+interpretation.
+</p>
+
+<p>
+Instead of treating geopolitical risk as a qualitative narrative only, the
+framework translates it into a measurable shock and studies its dynamic
+transmission through a macro-financial system.
+</p>
+
+<p>
+This connects naturally to broader themes in risk management, stress testing,
+scenario analysis and decision-making under uncertainty.
+</p>
+
+
+
+<h2>Modern Extension</h2>
+
+<p>
+A modern version of the project would preserve the Bayesian VAR structure but
+extend the evaluation and comparison framework.
+</p>
+
+<ul>
+
+<li>Compare Bayesian VAR results with local projections.</li>
+
+<li>Test robustness across alternative geopolitical-risk and uncertainty indicators.</li>
+
+<li>Run prior-sensitivity analysis across shrinkage specifications.</li>
+
+<li>Estimate rolling-window or time-varying parameter versions of the model.</li>
+
+<li>Compare responses across countries and macro-financial regimes.</li>
+
+<li>Integrate narrative event analysis with quantitative shock transmission.</li>
+
+</ul>
+
+
+
+<h2>Resources</h2>
+
+<p>
+Technical report in preparation.
+</p>
+
+<p>
+Code available upon request.
+</p>
+
+
+
+<h2>Technical Context</h2>
+
+<ul>
+
+<li>
+Litterman (1986), <i>Forecasting with Bayesian Vector Autoregressions</i> —
+relevant to Minnesota-style shrinkage priors in Bayesian VAR models.
+</li>
+
+<li>
+Sims (1980), <i>Macroeconomics and Reality</i> — relevant as the foundational
+VAR framework for macroeconomic dynamics.
+</li>
+
+<li>
+Caldara & Iacoviello, <i>Measuring Geopolitical Risk</i> — relevant to the use
+of geopolitical-risk indicators in macro-financial analysis.
+</li>
+
+<li>
+Kilian & Lütkepohl, <i>Structural Vector Autoregressive Analysis</i> — relevant
+to structural shock interpretation and impulse-response analysis.
+</li>
+
+</ul>
+
+
+
+</main>
+
+
+
+<footer>
+
+<p>
+© 2026 Lorenzo Ognibeni — Research Fellow, CNR ISTC
+</p>
+
+</footer>
+
+
+</body>
+</html>

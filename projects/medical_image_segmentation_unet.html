@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Medical Image Segmentation with U-Net — Lorenzo Ognibeni</title>
+
+<meta name="description" content="Deep-learning prototype for CT image segmentation using convolutional encoder-decoder networks, U-Net-style architectures and IoU evaluation.">
+
+<link rel="stylesheet" href="../style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+
+<script data-goatcounter="https://lorenzo-ai.goatcounter.com/count"
+async src="//gc.zgo.at/count.js"></script>
+
+</head>
+
+
+<body>
+
+<header class="navbar">
+
+<div class="logo">
+Signal & Structure
+</div>
+
+<nav>
+<a href="../index.html">Home</a>
+<a href="../projects.html">Projects</a>
+<a href="../notes/index.html">Research Log</a>
+<a href="../contact.html">Contact</a>
+</nav>
+
+</header>
+
+
+
+<main class="project-page">
+
+<h1 class="page-title">
+Medical Image Segmentation with U-Net
+</h1>
+
+
+<div class="project-meta">
+<span class="area-badge">Representation Learning</span>
+<span class="area-badge">2022</span>
+<span class="status-badge">Computer Vision Prototype</span>
+</div>
+
+
+
+<h2>Overview</h2>
+
+<p>
+This project explored deep-learning methods for medical image segmentation,
+with a focus on CT image masks and convolutional encoder-decoder architectures.
+</p>
+
+<p>
+The workflow built a segmentation pipeline from image-mask matching and
+preprocessing to U-Net-style model construction, training diagnostics and
+pixel-level evaluation with Intersection over Union.
+</p>
+
+<p>
+The project should be read as an applied computer-vision prototype, not as a
+clinical diagnostic system.
+</p>
+
+
+
+<h2>Problem</h2>
+
+<p>
+Medical image segmentation requires predicting a class label for each pixel or
+voxel region of an image. In CT imaging, this can be used to identify lesion
+regions or anatomical structures from grayscale images and corresponding masks.
+</p>
+
+<p>
+The goal was to construct a deep-learning workflow that could learn from
+paired CT images and segmentation masks, then evaluate predicted masks against
+held-out ground truth.
+</p>
+
+
+
+<h2>Data Preparation</h2>
+
+<p>
+The pipeline matched input CT images with their corresponding segmentation
+masks, filtered image paths using shared file-name structure and converted
+images into NumPy arrays suitable for neural-network training.
+</p>
+
+<ul>
+<li>Grayscale CT images were loaded from nested image folders.</li>
+<li>Segmentation masks were loaded from corresponding mask folders.</li>
+<li>Input and target lists were matched to keep image-mask correspondence.</li>
+<li>Images and masks were resized or loaded at native resolution depending on the experiment.</li>
+<li>Pixel values were normalized before model training.</li>
+<li>Masks were converted into categorical pixel-level targets.</li>
+</ul>
+
+
+
+<h2>Model Architecture</h2>
+
+<p>
+The core model was a U-Net-style convolutional encoder-decoder architecture.
+The contraction path used convolution, dropout and max-pooling layers to
+extract hierarchical image features. The expansion path used transposed
+convolutions and skip connections to recover spatial resolution.
+</p>
+
+<pre>
+CT image
+  -> convolution / pooling encoder
+  -> latent feature representation
+  -> transposed-convolution decoder
+  -> per-pixel softmax segmentation mask
+</pre>
+
+<p>
+The output layer produced pixel-level class probabilities through a softmax
+activation.
+</p>
+
+
+
+<h2>Training and Evaluation</h2>
+
+<p>
+The model was trained on an image-mask split and evaluated on held-out data.
+Training diagnostics included loss and accuracy curves, while segmentation
+quality was assessed using mean Intersection over Union and class-level IoU
+calculations.
+</p>
+
+<ul>
+<li>Train-test split for image and mask arrays.</li>
+<li>Categorical cross-entropy for multi-class segmentation masks.</li>
+<li>Early stopping based on validation loss.</li>
+<li>Training and validation loss curves.</li>
+<li>Training and validation accuracy curves.</li>
+<li>Mean IoU and class-wise IoU from predicted masks.</li>
+<li>Visual comparison of input image, ground-truth mask and predicted mask.</li>
+</ul>
+
+
+
+<h2>Implemented Elements</h2>
+
+<ul>
+<li>Image and mask path extraction from nested folder structures.</li>
+<li>Image-mask matching based on file-name substrings.</li>
+<li>Grayscale image loading and tensor conversion.</li>
+<li>Mask preprocessing and categorical target construction.</li>
+<li>U-Net-style model implementation in Keras/TensorFlow.</li>
+<li>Dropout and batch-normalization style experimentation.</li>
+<li>Training diagnostics and evaluation plots.</li>
+<li>Mean IoU and class-wise IoU segmentation metrics.</li>
+</ul>
+
+
+
+<h2>Evaluation Limits</h2>
+
+<p>
+The project was an educational and applied prototype. It was not validated for
+clinical use.
+</p>
+
+<ul>
+<li><b>Dataset size:</b> segmentation models require careful validation on sufficiently large and diverse datasets.</li>
+<li><b>Class imbalance:</b> lesion masks can be sparse relative to background pixels.</li>
+<li><b>Clinical validity:</b> medical deployment would require expert annotation review and external validation.</li>
+<li><b>Generalization:</b> models trained on one CT dataset may not transfer across scanners, protocols or hospitals.</li>
+<li><b>Metrics:</b> pixel accuracy can be misleading, so IoU and class-level metrics are essential.</li>
+</ul>
+
+
+
+<h2>Modern Extension</h2>
+
+<p>
+A modern version of this project would strengthen the medical-imaging
+evaluation protocol and compare more robust segmentation architectures.
+</p>
+
+<ul>
+<li>Use Dice loss or combined Dice/cross-entropy objectives.</li>
+<li>Add data augmentation for robustness.</li>
+<li>Use stratified train-validation-test splits by patient or scan source.</li>
+<li>Compare U-Net, U-Net++ and attention U-Net variants.</li>
+<li>Report Dice, IoU, precision, recall and calibration metrics.</li>
+<li>Track prediction uncertainty and failure cases.</li>
+</ul>
+
+
+
+<h2>Technologies and Methods Used</h2>
+
+<ul>
+<li><b>Python</b> for preprocessing and model orchestration.</li>
+<li><b>TensorFlow / Keras</b> for convolutional segmentation models.</li>
+<li><b>OpenCV / PIL</b> for image loading and preprocessing.</li>
+<li><b>NumPy</b> for tensor construction and array manipulation.</li>
+<li><b>U-Net-style CNNs</b> for encoder-decoder segmentation.</li>
+<li><b>Mean IoU</b> for segmentation evaluation.</li>
+<li><b>Matplotlib</b> for training curves and visual diagnostics.</li>
+</ul>
+
+
+
+<h2>Resources</h2>
+
+<p>
+Code and raw medical-image data are not public.
+</p>
+
+<p>
+An anonymized technical note can be prepared upon request.
+</p>
+
+</main>
+
+
+
+<footer>
+
+<p>
+© 2026 Lorenzo Ognibeni — Research Fellow, CNR ISTC
+</p>
+
+</footer>
+
+
+</body>
+</html>

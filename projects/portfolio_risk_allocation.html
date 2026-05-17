@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Portfolio Risk Allocation — Lorenzo Ognibeni</title>
+
+<meta name="description" content="Portfolio construction prototype with efficient frontier, resampling, Black-Litterman, equal risk contribution and rolling risk-allocation methods.">
+
+<link rel="stylesheet" href="../style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+
+<script data-goatcounter="https://lorenzo-ai.goatcounter.com/count"
+async src="//gc.zgo.at/count.js"></script>
+
+</head>
+
+
+<body>
+
+<header class="navbar">
+
+<div class="logo">
+Signal & Structure
+</div>
+
+<nav>
+<a href="../index.html">Home</a>
+<a href="../projects.html">Projects</a>
+<a href="../notes/index.html">Research Log</a>
+<a href="../contact.html">Contact</a>
+</nav>
+
+</header>
+
+
+
+<main class="project-page">
+
+<h1 class="page-title">
+Portfolio Risk Allocation
+</h1>
+
+
+<div class="project-meta">
+<span class="area-badge">Finance, Risk &amp; Regime Modeling</span>
+<span class="area-badge">2014</span>
+<span class="status-badge">Asset Allocation Prototype</span>
+</div>
+
+
+
+<h2>Overview</h2>
+
+<p>
+This project explored portfolio construction and risk allocation methods using
+MATLAB, with a focus on how different optimization frameworks translate return,
+covariance and investor-view assumptions into portfolio weights.
+</p>
+
+<p>
+The work compared classical mean-variance ideas with resampled efficient
+frontiers, Black-Litterman expected returns and equal-risk-contribution
+portfolio construction.
+</p>
+
+<p>
+The project should be read as an asset-allocation research prototype, not as a
+live trading system.
+</p>
+
+
+
+<h2>Problem</h2>
+
+<p>
+Portfolio optimization is highly sensitive to expected returns, covariance
+estimates and constraints. Small changes in inputs can produce unstable or
+concentrated allocations.
+</p>
+
+<p>
+The goal was to compare allocation methods that address this instability from
+different angles: resampling, equilibrium-implied returns, subjective views and
+risk-budgeting logic.
+</p>
+
+
+
+<h2>Methods</h2>
+
+<p>
+The project combined several allocation approaches:
+</p>
+
+<ul>
+<li><b>Mean-variance efficient frontier</b> as the classical benchmark.</li>
+<li><b>Resampled frontier</b> using simulated return paths to reduce sensitivity to estimation noise.</li>
+<li><b>Black-Litterman</b> to combine market-implied equilibrium returns with investor views.</li>
+<li><b>Equal Risk Contribution</b> to allocate portfolio risk more evenly across assets.</li>
+<li><b>Inverse-volatility weighting</b> as a simple risk-based benchmark.</li>
+<li><b>Rolling allocation experiments</b> for time-varying portfolio construction.</li>
+<li><b>VaR-based risk controls</b> for evaluating downside risk and allocation robustness.</li>
+</ul>
+
+
+
+<h2>Black-Litterman Framework</h2>
+
+<p>
+The Black-Litterman component started from market-capitalization weights and a
+covariance matrix to infer equilibrium expected returns through reverse
+optimization.
+</p>
+
+<pre>
+implied excess returns = risk_aversion * covariance * market_weights
+</pre>
+
+<p>
+Investor views were encoded through a view matrix and a vector of expected
+view returns. The posterior Black-Litterman returns were then used to derive
+new portfolio weights.
+</p>
+
+
+
+<h2>Equal Risk Contribution</h2>
+
+<p>
+The Equal Risk Contribution component searched for portfolio weights such that
+each asset contributed approximately the same amount of total portfolio risk.
+</p>
+
+<pre>
+minimize differences between asset risk contributions
+subject to:
+  weights sum to 1
+  weights are non-negative
+</pre>
+
+<p>
+The implementation used constrained nonlinear optimization and verified the
+result through marginal and percentage risk contributions.
+</p>
+
+
+
+<h2>Resampling and Rolling Analysis</h2>
+
+<p>
+The resampling component simulated return paths from an estimated mean and
+covariance structure, computed multiple efficient frontiers and averaged the
+resulting portfolio weights.
+</p>
+
+<p>
+The goal was to obtain smoother and less input-sensitive portfolio allocations
+than a single-sample efficient frontier.
+</p>
+
+<p>
+Rolling experiments extended this logic to time-varying input estimates,
+allowing allocations to adapt as covariance and return estimates changed.
+</p>
+
+
+
+<h2>VaR-Based Risk Controls</h2>
+
+<p>
+The portfolio-allocation work was complemented by Value-at-Risk diagnostics
+and backtesting logic used to evaluate whether risk estimates were consistent
+with realized portfolio behavior.
+</p>
+
+<p>
+These controls were used as a validation layer for allocation and strategy
+experiments, rather than as standalone trading signals.
+</p>
+
+<ul>
+<li>Rolling Value-at-Risk estimation for portfolio downside risk.</li>
+<li>Exceedance analysis comparing realized losses with VaR thresholds.</li>
+<li>Coverage-based tests for checking whether VaR violations were too frequent or too rare.</li>
+<li>Independence-style diagnostics for clustering of VaR violations over time.</li>
+<li>Traffic-light-style interpretation of backtesting results.</li>
+<li>Comparison of allocation behavior under different risk-control assumptions.</li>
+</ul>
+
+
+
+<h2>Implemented Elements</h2>
+
+<ul>
+<li>Import and preparation of index return datasets.</li>
+<li>Covariance matrix construction from volatilities and correlations.</li>
+<li>Classical efficient-frontier calculation.</li>
+<li>Monte Carlo resampling of return paths and portfolio weights.</li>
+<li>Black-Litterman posterior expected-return calculation.</li>
+<li>Portfolio-weight reconstruction from Black-Litterman returns.</li>
+<li>Equal Risk Contribution optimization with nonlinear constraints.</li>
+<li>Inverse-volatility allocation benchmark.</li>
+<li>Rolling risk-allocation experiments.</li>
+<li>VaR and VaR-backtesting diagnostics for portfolio risk control.</li>
+</ul>
+
+
+
+<h2>Outputs</h2>
+
+<p>
+The project produced portfolio weights, efficient-frontier plots, resampled
+frontier comparisons, Black-Litterman expected-return adjustments and
+risk-contribution diagnostics.
+</p>
+
+<p>
+The outputs were used to compare how different allocation methods distribute
+risk and expected return across assets.
+</p>
+
+
+
+<h2>Evaluation Limits</h2>
+
+<p>
+The project focused on allocation methodology rather than production-grade
+trading evaluation.
+</p>
+
+<ul>
+<li><b>Expected returns:</b> mean-variance and Black-Litterman outputs depend strongly on return assumptions.</li>
+<li><b>Covariance estimation:</b> sample covariance can be unstable in small or changing samples.</li>
+<li><b>Views:</b> Black-Litterman requires careful interpretation of subjective views and confidence levels.</li>
+<li><b>Backtesting:</b> a full trading evaluation would require transaction costs, turnover and walk-forward rules.</li>
+<li><b>VaR diagnostics:</b> VaR-based tests depend on distributional assumptions, window design and the number of exceedances.</li>
+<li><b>Constraints:</b> real portfolios may require liquidity, concentration and mandate constraints.</li>
+</ul>
+
+
+
+<h2>Modern Extension</h2>
+
+<p>
+A modern version of the project would turn the allocation logic into a
+reproducible research notebook and add a stronger backtesting layer.
+</p>
+
+<ul>
+<li>Run walk-forward portfolio rebalancing with transaction costs.</li>
+<li>Compare equal-weight, inverse-volatility, ERC, minimum-variance and Black-Litterman portfolios.</li>
+<li>Add shrinkage covariance estimators and factor-model covariance estimates.</li>
+<li>Track drawdown, turnover, volatility, Sharpe ratio and tail risk.</li>
+<li>Formalize VaR backtesting with Kupiec, Christoffersen and Basel traffic-light reporting.</li>
+<li>Stress-test allocations across market regimes.</li>
+<li>Port the implementation to Python with transparent tests and configuration.</li>
+</ul>
+
+
+
+<h2>Technologies and Methods Used</h2>
+
+<ul>
+<li><b>MATLAB</b> for optimization, simulation and visualization.</li>
+<li><b>Mean-variance optimization</b> for efficient-frontier construction.</li>
+<li><b>Black-Litterman</b> for equilibrium returns and investor views.</li>
+<li><b>Equal Risk Contribution</b> for risk-budgeting portfolio weights.</li>
+<li><b>Monte Carlo resampling</b> for more stable frontier estimation.</li>
+<li><b>Constrained nonlinear optimization</b> for risk-contribution objectives.</li>
+<li><b>Covariance and correlation modeling</b> for portfolio risk estimation.</li>
+<li><b>Value-at-Risk backtesting</b> for downside-risk validation.</li>
+</ul>
+
+
+
+<h2>Resources</h2>
+
+<p>
+Code and raw market data are not public.
+</p>
+
+<p>
+An anonymized technical note can be prepared upon request.
+</p>
+
+</main>
+
+
+
+<footer>
+
+<p>
+© 2026 Lorenzo Ognibeni — Research Fellow, CNR ISTC
+</p>
+
+</footer>
+
+
+</body>
+</html>

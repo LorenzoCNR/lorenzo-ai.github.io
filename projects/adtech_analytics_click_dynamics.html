@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ad-Tech Analytics & Click Dynamics — Lorenzo Ognibeni</title>
+
+<meta name="description" content="Applied data science project on advertising analytics, cloud data pipelines, seasonality, click dynamics, keyword value clusters and revenue modeling.">
+
+<link rel="stylesheet" href="../style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+
+<script data-goatcounter="https://lorenzo-ai.goatcounter.com/count"
+async src="//gc.zgo.at/count.js"></script>
+
+</head>
+
+
+<body>
+
+<header class="navbar">
+
+<div class="logo">
+Signal & Structure
+</div>
+
+<nav>
+<a href="../index.html">Home</a>
+<a href="../projects.html">Projects</a>
+<a href="../notes/index.html">Research Log</a>
+<a href="../contact.html">Contact</a>
+</nav>
+
+</header>
+
+
+
+<main class="project-page">
+
+<h1 class="page-title">
+Ad-Tech Analytics & Click Dynamics
+</h1>
+
+
+<div class="project-meta">
+<span class="area-badge">Applied Data Science</span>
+<span class="area-badge">2022-2023</span>
+<span class="status-badge">Professional Project</span>
+</div>
+
+
+
+<h2>Overview</h2>
+
+<p>
+This project summarizes applied data-science work on advertising performance
+data: cloud extraction, campaign analytics, keyword-level modeling, seasonality
+analysis and decision support for budget allocation.
+</p>
+
+<p>
+The work treated advertising data as a high-frequency panel where queries,
+keywords, channels, devices, markets and time interact. The goal was not to
+predict exact outcomes deterministically, but to build interpretable metrics
+and models for campaign timing, keyword evaluation and revenue-risk decisions.
+</p>
+
+<p>
+The public version is intentionally anonymized. It describes methods and
+system design without exposing company data, account identifiers, credentials,
+partner names or raw operational files.
+</p>
+
+
+
+<h2>Business Problem</h2>
+
+<p>
+Advertising platforms generate large volumes of noisy performance data. Useful
+decisions require more than raw clicks or revenue: teams need to understand
+where performance is persistent, where it is seasonal, where it is unstable and
+which keyword or channel states deserve additional budget.
+</p>
+
+<p>
+The project connected campaign metrics to operational questions:
+</p>
+
+<ul>
+<li>Which keywords, queries or channels show favorable revenue-per-click behavior?</li>
+<li>How do click and revenue metrics vary by hour, weekday, market and device?</li>
+<li>Which clusters of keyword value are stable, and which tend to transition into weaker states?</li>
+<li>How can historical and planner-derived features support campaign and budget decisions?</li>
+</ul>
+
+
+
+<h2>Data Infrastructure</h2>
+
+<p>
+The workflow combined cloud data access with local analytical modeling.
+Advertising tables were queried from a cloud warehouse and converted into
+analysis-ready pandas datasets.
+</p>
+
+<div class="pipeline">
+<div class="pipeline-step">AWS Athena / S3 advertising tables</div>
+<div class="pipeline-arrow">↓</div>
+<div class="pipeline-step">SQL extraction and filtering</div>
+<div class="pipeline-arrow">↓</div>
+<div class="pipeline-step">Python boto3 connector</div>
+<div class="pipeline-arrow">↓</div>
+<div class="pipeline-step">pandas cleaning and aggregation</div>
+<div class="pipeline-arrow">↓</div>
+<div class="pipeline-step pipeline-step--last">KPI modeling and decision-support outputs</div>
+</div>
+
+
+
+<h2>Data and Metrics</h2>
+
+<p>
+The data were organized around query, keyword, channel, device, market and
+time dimensions. Core quantitative fields included searches, impressions,
+clicks, cost and revenue.
+</p>
+
+<p>
+From these fields, the workflow constructed advertising KPIs such as:
+</p>
+
+<ul>
+<li><b>CTR:</b> clicks divided by searches or impressions, depending on the reporting layer.</li>
+<li><b>RPC:</b> revenue per click.</li>
+<li><b>RPM:</b> revenue per thousand impressions or searches.</li>
+<li><b>CPC:</b> cost per click.</li>
+<li><b>Gross revenue and cost-revenue indicators</b> for campaign evaluation.</li>
+<li><b>Device, market and geo splits</b> for segment-level interpretation.</li>
+</ul>
+
+
+
+<h2>Seasonality and Panel Structure</h2>
+
+<p>
+High-frequency advertising panel data were transformed into time-series and
+panel structures to study trend, seasonality and stochastic residual dynamics.
+</p>
+
+<p>
+The analysis included hourly and daily aggregations, market splits, device
+filters and seasonal decomposition logic. This made it possible to inspect
+how revenue and click behavior changed across hours of day, weekdays, months
+and campaign contexts.
+</p>
+
+<p>
+The methodological idea was to separate recurring deterministic structure from
+more volatile residual behavior, so that campaign decisions were not based on
+raw short-term fluctuations alone.
+</p>
+
+
+
+<h2>Keyword Value Clustering</h2>
+
+<p>
+One component modeled keyword value as a set of empirical performance states.
+Instead of assigning each keyword to one fixed channel or treating every query
+independently, keywords were grouped into value clusters based on revenue-per-
+click behavior and related performance metrics.
+</p>
+
+<p>
+The operational goal was to support channel assignment and budget decisions by
+identifying favorable, intermediate and weak keyword states.
+</p>
+
+<ul>
+<li>Keyword-level performance histories were cleaned and aggregated.</li>
+<li>Rolling windows were compared to evaluate short-term predictive stability.</li>
+<li>Cluster assignments were used as interpretable states rather than black-box scores.</li>
+<li>The framework supported analysis of persistence and movement between value states.</li>
+</ul>
+
+
+
+<h2>Markov Transition Modeling</h2>
+
+<p>
+The project explored a finite-state Markov-style transition model for keyword
+value clusters. The model estimated how often keywords moved between value
+states over time, making it possible to study persistence, volatility and jump
+probabilities.
+</p>
+
+<p>
+This was not framed as exact price prediction. It was a state-dynamics tool:
+given a keyword's recent performance state, the model helped reason about the
+probability of remaining stable, improving or moving into a weaker cluster.
+</p>
+
+
+
+<h2>Revenue and Click Performance Modeling</h2>
+
+<p>
+Additional modeling work connected keyword-level performance to planner and
+campaign features such as search volume, bid information, competition index,
+estimated clicks, estimated CTR and estimated CPC.
+</p>
+
+<p>
+The modeling layer included regression-style experiments, tree-based models
+and error diagnostics for revenue or click-performance targets. These models
+were used as exploratory decision-support tools rather than fully automated
+budgeting systems.
+</p>
+
+
+
+<h2>A/B Testing and Experimentation</h2>
+
+<p>
+Additional analyses included A/B testing workflows for landing-page or
+creative variants. These analyses connected click behavior and conversion
+metrics to product or campaign decisions while keeping statistical uncertainty
+explicit.
+</p>
+
+
+
+<h2>Business Output</h2>
+
+<p>
+The project produced analytical outputs for interpreting campaign performance
+and supporting operational decisions.
+</p>
+
+<ul>
+<li>Seasonality diagnostics for campaign timing.</li>
+<li>Keyword and query-level performance summaries.</li>
+<li>Cluster-based views of favorable and risky keyword states.</li>
+<li>Transition matrices for state persistence and movement.</li>
+<li>Revenue and click-performance modeling experiments.</li>
+<li>Reports and visualizations for business stakeholders.</li>
+</ul>
+
+
+
+<h2>Evaluation Limits</h2>
+
+<p>
+Advertising systems are non-stationary: platform rules, competition, bidding
+behavior, traffic mix and user behavior can change over time. The project was
+therefore treated as decision support rather than a fully autonomous prediction
+engine.
+</p>
+
+<ul>
+<li><b>Non-stationarity:</b> historical performance may degrade when platform or market conditions change.</li>
+<li><b>Selection effects:</b> observed keyword histories reflect previous campaign decisions.</li>
+<li><b>Missing histories:</b> sparse or new queries can be difficult to model reliably.</li>
+<li><b>Attribution limits:</b> revenue and click metrics depend on platform reporting definitions.</li>
+<li><b>Operational constraints:</b> models must be interpreted with budget, channel and business constraints in mind.</li>
+</ul>
+
+
+
+<h2>Technologies and Methods Used</h2>
+
+<ul>
+<li><b>Python</b> for data processing, modeling and automation.</li>
+<li><b>pandas / NumPy</b> for high-frequency panel data preparation and aggregation.</li>
+<li><b>AWS Athena / S3</b> for cloud data extraction and analytical storage.</li>
+<li><b>boto3</b> for programmatic query execution and result retrieval.</li>
+<li><b>SQL</b> for cloud-side filtering, joins and reporting-table construction.</li>
+<li><b>scikit-learn</b> for regression, tree-based modeling and evaluation experiments.</li>
+<li><b>statsmodels</b> for time-series decomposition and seasonality analysis.</li>
+<li><b>Matplotlib / Seaborn</b> for visual diagnostics and stakeholder reporting.</li>
+<li><b>A/B testing</b> for comparing campaign or landing-page variants.</li>
+<li><b>Finite-state transition modeling</b> for keyword value dynamics.</li>
+</ul>
+
+
+
+<h2>Resources</h2>
+
+<p>
+Internal documents, data and code are not public.
+</p>
+
+<p>
+An anonymized technical note can be prepared upon request.
+</p>
+
+</main>
+
+
+
+<footer>
+
+<p>
+© 2026 Lorenzo Ognibeni — Research Fellow, CNR ISTC
+</p>
+
+</footer>
+
+
+</body>
+</html>

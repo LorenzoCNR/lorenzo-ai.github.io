@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Structured Certificate Pricing & Credit Risk — Lorenzo Ognibeni</title>
+
+<meta name="description" content="Replication-based pricing of an equity protection certificate using Black-Scholes, Nelson-Siegel-Svensson yield curves and credit-risk extensions.">
+
+<link rel="stylesheet" href="../style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+
+<script data-goatcounter="https://lorenzo-ai.goatcounter.com/count"
+async src="//gc.zgo.at/count.js"></script>
+
+</head>
+
+
+<body>
+
+<header class="navbar">
+
+<div class="logo">
+Signal & Structure
+</div>
+
+<nav>
+<a href="../index.html">Home</a>
+<a href="../projects.html">Projects</a>
+<a href="../notes/index.html">Research Log</a>
+<a href="../contact.html">Contact</a>
+</nav>
+
+</header>
+
+
+
+<main class="project-page">
+
+<h1 class="page-title">
+Structured Certificate Pricing & Credit Risk
+</h1>
+
+
+<div class="project-meta">
+<span class="area-badge">Finance, Risk &amp; Regime Modeling</span>
+<span class="area-badge">2017</span>
+<span class="status-badge">Derivatives Pricing Prototype</span>
+</div>
+
+
+
+<h2>Overview</h2>
+
+<p>
+This project studied the pricing of an equity protection investment
+certificate through a replication-based derivatives framework.
+</p>
+
+<p>
+The product was an equity-linked structured certificate on the FTSE MIB, with
+capital protection and an upside cap. The analysis compared the observed
+market price with a theoretical replication value obtained from option-pricing
+components and market inputs.
+</p>
+
+<p>
+The project also considered how credit risk could be incorporated into the
+valuation, using the idea that part of the replicating portfolio behaves like
+issuer debt while the option-spread component remains non-negative.
+</p>
+
+
+
+<h2>Problem</h2>
+
+<p>
+Structured certificates combine bond-like and option-like components. Their
+market price may differ from the value implied by a simple replication
+portfolio, because of issuance margins, model assumptions, liquidity,
+dividends, volatility inputs and issuer credit risk.
+</p>
+
+<p>
+The goal was to analyze whether the certificate's issue and market prices were
+consistent with a theoretical replication value, and to identify which modeling
+extensions were needed to account for credit risk.
+</p>
+
+
+
+<h2>Replication Logic</h2>
+
+<p>
+The payoff was represented through a portfolio of vanilla option components:
+</p>
+
+<pre>
+Long call with strike 0
++ long put at the protection level
+- short call at the cap level
+</pre>
+
+<p>
+Equivalently, the payoff can be interpreted through put-call parity as:
+</p>
+
+<pre>
+Zero-coupon bond at the protection level
++ call spread between protection and cap
+</pre>
+
+<p>
+This second representation is useful for thinking about credit risk, because
+the bond-like component exposes the investor to issuer default risk.
+</p>
+
+
+
+<h2>Pricing Model</h2>
+
+<p>
+The base valuation used Black-Scholes-style option pricing with interest rate,
+dividend and volatility inputs.
+</p>
+
+<pre>
+Certificate value =
+  call(S, K = 0)
+  + put(S, K = protection)
+  - call(S, K = cap)
+</pre>
+
+<p>
+The theoretical value was normalized by the initial underlying level to express
+the certificate price on a comparable scale.
+</p>
+
+
+
+<h2>Market Inputs</h2>
+
+<ul>
+<li><b>Underlying:</b> FTSE MIB historical levels.</li>
+<li><b>Volatility:</b> historical volatility estimated from log returns before issuance.</li>
+<li><b>Dividend input:</b> dividend yield converted into continuous intensity.</li>
+<li><b>Interest rates:</b> spot rates obtained from ECB Nelson-Siegel-Svensson yield-curve parameters.</li>
+<li><b>Contract terms:</b> protection level, cap level, issue date and maturity date.</li>
+<li><b>Observed prices:</b> market prices used for theoretical-versus-observed comparison.</li>
+</ul>
+
+
+
+<h2>Yield Curve Modeling</h2>
+
+<p>
+The project used the Nelson-Siegel-Svensson parameterization to obtain
+maturity-matched spot rates from ECB yield-curve data.
+</p>
+
+<pre>
+r(tau) = NSS(tau; beta0, beta1, beta2, beta3, tau1, tau2)
+</pre>
+
+<p>
+For each valuation date, the remaining time to maturity was computed and the
+corresponding spot rate was extracted from the fitted term structure.
+</p>
+
+
+
+<h2>Credit-Risk Extension</h2>
+
+<p>
+The project considered extending the valuation beyond a default-free
+replication model by incorporating issuer credit risk.
+</p>
+
+<p>
+The credit-risk intuition was based on the parity representation:
+</p>
+
+<pre>
+Protected bond-like component
++ non-negative option spread
+</pre>
+
+<p>
+This creates a structured exposure to issuer credit risk: simpler than a fully
+bilateral derivative exposure, but richer than a plain-vanilla bond because the
+certificate payoff depends on an equity-linked component.
+</p>
+
+<p>
+Possible extensions included CDS-implied default intensities, reduced-form
+credit-risk adjustments and structural approaches to equity-linked credit
+exposure.
+</p>
+
+
+
+<h2>Implemented Elements</h2>
+
+<ul>
+<li>Data preparation for underlying prices, dividend information and observed certificate prices.</li>
+<li>Construction of a business-day valuation calendar.</li>
+<li>Historical volatility estimation from FTSE MIB log returns.</li>
+<li>Residual time-to-maturity calculation for each valuation date.</li>
+<li>Nelson-Siegel-Svensson spot-rate extraction from yield-curve parameters.</li>
+<li>Black-Scholes valuation of call and put components.</li>
+<li>Replication-based certificate price calculation.</li>
+<li>Theoretical-versus-observed price comparison.</li>
+<li>Emission premium and mispricing analysis.</li>
+<li>Exploration of implied-volatility inversion and non-unique solutions.</li>
+</ul>
+
+
+
+<h2>Outputs</h2>
+
+<p>
+The analysis produced theoretical certificate values, observed-market
+comparisons and emission-premium diagnostics.
+</p>
+
+<p>
+The model highlighted a discrepancy between observed prices and the
+replication-based theoretical value, motivating discussion of model
+assumptions, volatility inputs, issuer margin and credit-risk adjustments.
+</p>
+
+
+
+<h2>Evaluation Limits</h2>
+
+<p>
+The project was a derivatives-pricing prototype rather than a full production
+valuation engine.
+</p>
+
+<ul>
+<li><b>Volatility:</b> historical volatility may not represent market-implied expectations.</li>
+<li><b>Dividends:</b> dividend assumptions materially affect equity-linked certificate pricing.</li>
+<li><b>Rates:</b> NSS spot-rate extraction depends on curve parameters and interpolation choices.</li>
+<li><b>Credit risk:</b> issuer default risk requires additional calibration from CDS or credit spreads.</li>
+<li><b>Liquidity and margins:</b> observed market prices can include bid-ask effects, fees and issuance margins.</li>
+<li><b>Model risk:</b> Black-Scholes assumptions may be too restrictive for structured products.</li>
+</ul>
+
+
+
+<h2>Modern Extension</h2>
+
+<p>
+A modern version of the project would separate the pricing engine into
+modular components and add a more explicit credit-risk layer.
+</p>
+
+<ul>
+<li>Calibrate discounting and issuer-credit curves separately.</li>
+<li>Use CDS-implied hazard rates or credit-spread curves for credit adjustment.</li>
+<li>Compare historical and implied volatility inputs.</li>
+<li>Run sensitivity analysis across volatility, dividends, rates and credit spreads.</li>
+<li>Implement scenario analysis for issuer-credit deterioration.</li>
+<li>Compare Black-Scholes replication with alternative equity-volatility models.</li>
+</ul>
+
+
+
+<h2>Technologies and Methods Used</h2>
+
+<ul>
+<li><b>R</b> for pricing implementation, data preparation and visualization.</li>
+<li><b>Black-Scholes option pricing</b> for vanilla option components.</li>
+<li><b>Replicating portfolio logic</b> for structured certificate valuation.</li>
+<li><b>Nelson-Siegel-Svensson yield curve</b> for maturity-matched spot rates.</li>
+<li><b>Historical volatility estimation</b> from equity-index log returns.</li>
+<li><b>Business-day calendars</b> for residual maturity calculation.</li>
+<li><b>Root-finding</b> for implied-volatility diagnostics.</li>
+<li><b>Credit-risk modeling concepts</b> including CDS-implied default intensities.</li>
+</ul>
+
+
+
+<h2>Resources</h2>
+
+<p>
+Code and raw market data are not public.
+</p>
+
+<p>
+An anonymized technical note can be prepared upon request.
+</p>
+
+
+
+<h2>Technical Context</h2>
+
+<ul>
+<li>Black and Scholes option-pricing framework for vanilla derivatives.</li>
+<li>Nelson-Siegel-Svensson term-structure modeling for yield-curve fitting.</li>
+<li>Hull and White reduced-form credit-risk ideas for defaultable instruments.</li>
+<li>Brigo and Mercurio interest-rate and credit-risk modeling references.</li>
+</ul>
+
+
+
+</main>
+
+
+
+<footer>
+
+<p>
+© 2026 Lorenzo Ognibeni — Research Fellow, CNR ISTC
+</p>
+
+</footer>
+
+
+</body>
+</html>

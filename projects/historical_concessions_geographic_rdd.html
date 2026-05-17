@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Historical Concessions & Geographic RDD — Lorenzo Ognibeni</title>
+
+<meta name="description" content="Geographic regression-discontinuity and spatial econometrics project on historical concessions, local outcomes, conflict, public goods and night lights.">
+
+<link rel="stylesheet" href="../style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+
+<script data-goatcounter="https://lorenzo-ai.goatcounter.com/count"
+async src="//gc.zgo.at/count.js"></script>
+
+</head>
+
+
+<body>
+
+<header class="navbar">
+
+<div class="logo">
+Signal & Structure
+</div>
+
+<nav>
+<a href="../index.html">Home</a>
+<a href="../projects.html">Projects</a>
+<a href="../notes/index.html">Research Log</a>
+<a href="../contact.html">Contact</a>
+</nav>
+
+</header>
+
+
+
+<main class="project-page">
+
+<h1 class="page-title">
+Historical Concessions & Geographic RDD
+</h1>
+
+
+<div class="project-meta">
+<span class="area-badge">Causal &amp; Institutional Systems</span>
+<span class="area-badge">2019</span>
+<span class="status-badge">Geospatial Causal Prototype</span>
+</div>
+
+
+
+<h2>Overview</h2>
+
+<p>
+This project studied whether historical concession boundaries were associated
+with persistent differences in local outcomes, using a geographic
+regression-discontinuity design and spatially matched control areas.
+</p>
+
+<p>
+The work combined concession boundary data, village-level data, geographic
+controls, conflict outcomes, public-goods indicators and night-light measures
+to compare areas inside historical concessions with nearby areas outside the
+same boundaries.
+</p>
+
+<p>
+The project should be read as an applied causal-inference and political-economy
+prototype, not as a simple descriptive comparison.
+</p>
+
+
+
+<h2>Problem</h2>
+
+<p>
+Historical concessions may shape local development through infrastructure,
+settlement patterns, institutional exposure and conflict dynamics. The
+empirical challenge is that concession areas were not randomly assigned and
+may differ geographically from nearby untreated areas.
+</p>
+
+<p>
+The goal was to construct a credible comparison between treated villages inside
+concession boundaries and nearby control villages outside those boundaries,
+while accounting for geographic confounders.
+</p>
+
+
+
+<h2>Identification Strategy</h2>
+
+<p>
+The core design was geographic: compare units near concession boundaries, where
+inside and outside villages are more likely to share similar geography than
+units farther away.
+</p>
+
+<pre>
+villages inside concession boundary
+vs.
+nearby villages outside concession boundary
+</pre>
+
+<p>
+The analysis used distance buffers, geographic matching and boundary-based
+comparisons to reduce imbalance between treated and control locations.
+</p>
+
+
+
+<h2>Data Construction</h2>
+
+<p>
+The workflow joined multiple spatial and tabular datasets, including
+concession indicators, village identifiers, coordinates and local-outcome
+variables. Boundary and GIS-derived inputs were treated as source data; the
+main implementation work focused on coordinate-based matching, dataset
+construction and econometric estimation.
+</p>
+
+<ul>
+<li>Concession boundary indicators for treated locations.</li>
+<li>Nearby buffer groups at alternative distance thresholds.</li>
+<li>Latitude, longitude, altitude and distance-to-city controls.</li>
+<li>Conflict-event data matched to village locations.</li>
+<li>Public-goods variables such as schools, health facilities and roads.</li>
+<li>Night-light intensity as a proxy for local economic activity.</li>
+</ul>
+
+
+
+<h2>Geographic Balance and Matching</h2>
+
+<p>
+The project included balance checks between treated and nearby control units.
+Matched datasets were constructed at multiple distance thresholds, using
+latitude-longitude information and distance-based rules to connect treated
+locations with comparable nearby controls.
+</p>
+
+<p>
+Balance diagnostics compared geographic and baseline variables across inside
+and outside areas before interpreting outcome regressions. The matching and
+data-construction logic was developed across MATLAB and Stata, while the final
+regression workflow was implemented in Stata.
+</p>
+
+
+
+<h2>Outcome Models</h2>
+
+<p>
+The analysis considered several outcome families:
+</p>
+
+<ul>
+<li><b>Conflict:</b> counts of conflict events around treated and control villages.</li>
+<li><b>Public goods:</b> schools, health facilities and road density.</li>
+<li><b>Economic activity:</b> night-light intensity.</li>
+<li><b>Population and geography:</b> density, altitude, distance and river-related controls.</li>
+</ul>
+
+<p>
+Regression specifications included geographic controls such as latitude and
+longitude, and alternative count-data models were considered for overdispersed
+outcomes.
+</p>
+
+
+
+<h2>Spatial Inference</h2>
+
+<p>
+Because observations are spatially located, the project considered the problem
+of spatial dependence in residuals and standard errors.
+</p>
+
+<p>
+The workflow included references to Conley-style spatial HAC corrections and
+spatially robust inference as part of the econometric design.
+</p>
+
+
+
+<h2>Implemented Elements</h2>
+
+<ul>
+<li>Construction of treated and control datasets around concession boundaries.</li>
+<li>Cleaning and merging of village-level, conflict and public-goods data.</li>
+<li>Creation of buffer groups at different distance thresholds.</li>
+<li>Coordinate-based matching of treated and nearby control villages.</li>
+<li>Geographic balance checks using treated and nearby control units.</li>
+<li>Regression-discontinuity style specifications with coordinate controls.</li>
+<li>Conflict regressions and count-model diagnostics.</li>
+<li>Public-goods regressions for health facilities, schools and roads.</li>
+<li>Night-light regressions as a proxy for local economic activity.</li>
+<li>Exploration of spatial-HAC and Conley-style inference.</li>
+</ul>
+
+
+
+<h2>Outputs</h2>
+
+<p>
+The project produced cleaned analysis datasets, balance checks and regression
+tables comparing concession and nearby non-concession areas across several
+outcomes.
+</p>
+
+<p>
+The value of the project lies in the research design: moving from historical
+geographic boundaries to a structured causal comparison with explicit
+attention to matching, balance and spatial confounding.
+</p>
+
+
+
+<h2>Evaluation Limits</h2>
+
+<p>
+The design is informative but not automatic proof of causality. Historical
+concession placement, omitted geographic variables and spatial dependence all
+require caution.
+</p>
+
+<ul>
+<li><b>Boundary validity:</b> treated and control areas must be comparable near the concession boundary.</li>
+<li><b>Spatial dependence:</b> nearby observations may have correlated shocks and outcomes.</li>
+<li><b>Historical selection:</b> concession placement may reflect unobserved economic or geographic advantages.</li>
+<li><b>Measurement:</b> conflict, public-goods and night-light data can contain location and reporting error.</li>
+<li><b>Bandwidth choice:</b> estimates can change across distance thresholds.</li>
+</ul>
+
+
+
+<h2>Modern Extension</h2>
+
+<p>
+A modern version of the project would formalize the design in a reproducible
+geospatial pipeline and strengthen the robustness framework.
+</p>
+
+<ul>
+<li>Automate nearest-neighbor matching and duplicate-resolution rules.</li>
+<li>Use modern geographic RDD tooling and bandwidth sensitivity analysis.</li>
+<li>Add Conley or spatial-clustered standard errors consistently.</li>
+<li>Run placebo boundaries and pre-treatment balance checks.</li>
+<li>Visualize concession boundaries, buffers and matched villages on maps.</li>
+<li>Package the workflow as a reproducible MATLAB/Stata or Python geospatial project.</li>
+</ul>
+
+
+
+<h2>Technologies and Methods Used</h2>
+
+<ul>
+<li><b>MATLAB</b> for coordinate-based matching and distance logic.</li>
+<li><b>Stata</b> for data preparation, merging, regression analysis and output tables.</li>
+<li><b>Geographic regression discontinuity</b> for boundary-based causal comparison.</li>
+<li><b>Geospatial matching</b> for nearby treated-control comparisons.</li>
+<li><b>Negative binomial models</b> for overdispersed count outcomes.</li>
+<li><b>Spatial-HAC / Conley-style inference</b> as a robustness direction.</li>
+<li><b>GIS-derived variables</b> including coordinates, buffers and distance measures.</li>
+</ul>
+
+
+
+<h2>Resources</h2>
+
+<p>
+Code and raw data are not public.
+</p>
+
+<p>
+An anonymized technical note can be prepared upon request.
+</p>
+
+</main>
+
+
+
+<footer>
+
+<p>
+© 2026 Lorenzo Ognibeni — Research Fellow, CNR ISTC
+</p>
+
+</footer>
+
+
+</body>
+</html>

@@ -7,6 +7,8 @@
 
 <title>Signal & Structure — Lorenzo Ognibeni</title>
 
+<meta name="description" content="Lorenzo Ognibeni — Research Fellow at CNR ISTC. Representation learning, probabilistic modeling and structural analysis of complex systems.">
+
 <link rel="stylesheet" href="style.css">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
@@ -28,7 +30,7 @@ Signal & Structure
 
 <nav>
 <a href="projects.html">Projects</a>
-<a href="discussion/index.html">Research Log</a>
+<a href="notes/index.html">Research Log</a>
 <a href="contact.html">Contact</a>
 </nav>
 
@@ -57,7 +59,7 @@ Modeling Representation, Structure and Risk in Complex Systems
 
 <p>
 I develop representation learning and probabilistic modeling frameworks
-to study how complex systems learn, adapt and fail under uncertainty.
+to study structure, dynamics and risk in complex systems under uncertainty.
 </p>
 
 <div class="hero-links">
@@ -66,7 +68,7 @@ to study how complex systems learn, adapt and fail under uncertainty.
 Explore Projects
 </a>
 
-<a href="discussion/index.html" class="hero-button alt">
+<a href="notes/index.html" class="hero-button alt">
 Research Log
 </a>
 
@@ -78,30 +80,45 @@ Research Log
 
 
 
-<!-- RESEARCH AREAS -->
+<!-- RESEARCH AREAS MAP -->
 
 <section class="focus">
 
-<a href="#risk" class="focus-link">
-<div class="focus-item">
-<h3>Risk & Regime Modeling</h3>
-<p>Bayesian inference, regime dynamics and systemic instability.</p>
+<div class="focus-primary">
+
+<a href="#representation" class="focus-link">
+<div class="focus-item main-focus">
+<h3>Representation Learning</h3>
+<p>Current research focus: latent structure, contrastive learning and geometric representations of neural systems.</p>
 </div>
 </a>
 
-<a href="#representation" class="focus-link">
-<div class="focus-item center-focus">
-<h3>Representation Learning</h3>
-<p>Contrastive learning and geometric structure of neural systems.</p>
+</div>
+
+
+<div class="focus-secondary">
+
+<a href="#nlp" class="focus-link">
+<div class="focus-item">
+<h3>NLP & Text Representation</h3>
+<p>Text analytics, semantic similarity and retrieval in specialized corpora.</p>
+</div>
+</a>
+
+<a href="#risk" class="focus-link">
+<div class="focus-item">
+<h3>Finance, Risk & Regime Modeling</h3>
+<p>Financial time-series models, regime dynamics and quantitative risk prototypes.</p>
 </div>
 </a>
 
 <a href="#causal" class="focus-link">
 <div class="focus-item">
 <h3>Causal & Institutional Systems</h3>
-<p>Causal inference and structural modeling of complex institutions.</p>
-</div>
+<p>Causal inference, policy evaluation and shock-transmission analysis in institutional systems.</p></div>
 </a>
+
+</div>
 
 </section>
 
@@ -109,9 +126,21 @@ Research Log
 
 <!-- REPRESENTATION LEARNING -->
 
-<section class="area-block" id="representation">
+<section class="area-drawer primary-drawer" id="representation">
 
-<h2 class="area-title">Representation Learning</h2>
+<div class="drawer-header">
+
+<div>
+<p class="drawer-kicker">Current focus</p>
+<h2>Representation Learning</h2>
+</div>
+
+<span class="drawer-action">+</span>
+
+</div>
+
+
+<div class="drawer-content">
 
 <div class="area-layout">
 
@@ -120,14 +149,97 @@ Research Log
 
 <div class="projects-grid">
 
-<a href="projects/neuro-bridge.html" class="project-item">
-<h3>Neuro-Bridge</h3>
-<p>Contrastive manifold learning for neural population activity.</p>
+<a href="projects/neuro_bridge.html" class="project-item">
+<h3>NeuroBridge</h3>
+<p>Modular framework for neural representation learning, contrastive sampling and latent dynamics.</p>
 </a>
 
-<a href="projects/cebra-pipeline.html" class="project-item">
+<a href="projects/medical_image_segmentation_unet.html" class="project-item project-item-secondary">
+<h3>Medical Image Segmentation with U-Net</h3>
+<p>CT image segmentation prototype with encoder-decoder CNNs and IoU evaluation.</p>
+</a>
+
+<a href="projects/hospital_flow_forecasting_lstm.html" class="project-item project-item-secondary">
+<h3>Hospital Flow Forecasting with LSTM</h3>
+<p>Applied LSTM forecasting prototype for hospital-flow dynamics and triage time series.</p>
+</a>
+
+<!--<a href="projects/cebra-pipeline.html" class="project-item">
 <h3>CEBRA Pipeline</h3>
 <p>Representation learning and neural decoding.</p>
+</a>-->
+
+</div>
+
+</div>
+
+
+
+<div class="discussion-column">
+
+<h3 class="discussion-title">
+Research Log <span class="log-note">(comments welcome)</span>
+</h3>
+
+<ul class="research-log">
+
+<li>
+<span class="research-log-placeholder">Geometry of neural representations — notes in preparation</span>
+</li>
+
+<li>
+<span class="research-log-placeholder">Contrastive learning and manifolds — notes in preparation</span>
+</li>
+
+<li>
+<span class="research-log-placeholder">Future directions for neural embeddings — notes in preparation</span>
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- NLP & TEXT REPRESENTATION -->
+
+<section class="area-drawer" id="nlp">
+
+<div class="drawer-header">
+
+<div>
+<p class="drawer-kicker">Text systems</p>
+<h2>NLP & Text Representation</h2>
+</div>
+
+<span class="drawer-action">+</span>
+
+</div>
+
+
+<div class="drawer-content">
+
+<div class="area-layout">
+
+
+<div class="projects-column">
+
+<div class="projects-grid">
+
+<a href="projects/legal_nlp_query_expansion.html" class="project-item">
+<h3>Legal NLP & Query Expansion</h3>
+<p>Seed-based retrieval, TF-IDF scoring and word embeddings for legal terminology expansion.</p>
+</a>
+
+<a href="projects/political_tweet_sentiment.html" class="project-item project-item-secondary">
+<h3>Political Tweet Sentiment & Framing</h3>
+<p>Applied NLP pipeline for lexical analysis, sentiment and emotion profiling of political tweets.</p>
 </a>
 
 </div>
@@ -145,24 +257,16 @@ Research Log <span class="log-note">(comments welcome)</span>
 <ul class="research-log">
 
 <li>
-<a href="discussion/neural-representation-geometry.html">
-Geometry of neural representations
-</a>
+<span class="research-log-placeholder">Text representation and semantic similarity — notes in preparation</span>
 </li>
 
 <li>
-<a href="discussion/contrastive-learning-manifolds.html">
-Contrastive learning and manifolds
-</a>
-</li>
-
-<li>
-<a href="discussion/future-neural-embeddings.html">
-Future directions for neural embeddings
-</a>
+<span class="research-log-placeholder">Information retrieval in specialized corpora — notes in preparation</span>
 </li>
 
 </ul>
+
+</div>
 
 </div>
 
@@ -174,9 +278,21 @@ Future directions for neural embeddings
 
 <!-- RISK -->
 
-<section class="area-block" id="risk">
+<section class="area-drawer" id="risk">
 
-<h2 class="area-title">Risk & Regime Modeling</h2>
+<div class="drawer-header">
+
+<div>
+<p class="drawer-kicker">Quantitative risk</p>
+<h2>Finance, Risk & Regime Modeling</h2>
+</div>
+
+<span class="drawer-action">+</span>
+
+</div>
+
+
+<div class="drawer-content">
 
 <div class="area-layout">
 
@@ -185,14 +301,29 @@ Future directions for neural embeddings
 
 <div class="projects-grid">
 
-<a href="projects/systemic-risk.html" class="project-item">
+<!--<a href="projects/systemic-risk.html" class="project-item">
 <h3>Systemic Risk Modeling</h3>
 <p>Probabilistic modeling of financial instability.</p>
-</a>
+</a>-->
 
 <a href="projects/partial-cointegration.html" class="project-item">
 <h3>Partial Cointegration</h3>
 <p>State-space models for statistical arbitrage.</p>
+</a>
+
+<a href="projects/structured_certificate_pricing.html" class="project-item project-item-secondary">
+<h3>Structured Certificate Pricing & Credit Risk</h3>
+<p>Replication-based pricing with Black-Scholes, NSS yield curves and credit-risk extensions.</p>
+</a>
+
+<a href="projects/systemic_risk_delta_covar.html" class="project-item project-item-secondary">
+<h3>Systemic Risk & Rolling Delta CoVaR</h3>
+<p>Rolling quantile-regression framework for institutional systemic-risk contributions.</p>
+</a>
+
+<a href="projects/portfolio_risk_allocation.html" class="project-item project-item-secondary">
+<h3>Portfolio Risk Allocation</h3>
+<p>Black-Litterman, equal-risk contribution and VaR-based portfolio risk controls.</p>
 </a>
 
 </div>
@@ -215,19 +346,9 @@ Partial Cointegration — model notes
 </a>
 </li>
 
-<li>
-<a href="discussion/regime-dynamics-financial-systems.html">
-Regime dynamics in financial systems
-</a>
-</li>
-
-<li>
-<a href="discussion/systemic-risk-models.html">
-Probabilistic models of systemic instability
-</a>
-</li>
-
 </ul>
+
+</div>
 
 </div>
 
@@ -239,9 +360,21 @@ Probabilistic models of systemic instability
 
 <!-- CAUSAL -->
 
-<section class="area-block" id="causal">
+<section class="area-drawer" id="causal">
 
-<h2 class="area-title">Causal & Institutional Systems</h2>
+<div class="drawer-header">
+
+<div>
+<p class="drawer-kicker">Policy and institutions</p>
+<h2>Causal & Institutional Systems</h2>
+</div>
+
+<span class="drawer-action">+</span>
+
+</div>
+
+
+<div class="drawer-content">
 
 <div class="area-layout">
 
@@ -250,15 +383,20 @@ Probabilistic models of systemic instability
 
 <div class="projects-grid">
 
-<a href="projects/geopolitical-risk.html" class="project-item">
-<h3>Geopolitical Risk Modeling</h3>
-<p>Structural models of institutional systems.</p>
+<a href="projects/bayesian_var_geopolitical_risk.html" class="project-item">
+<h3>Bayesian VAR & Institutional Shocks</h3>
+<p>Bayesian analysis of policy uncertainty, institutional shocks and macroeconomic transmission.</p>
 </a>
 
-<a href="projects/policy-evaluation.html" class="project-item">
+<a href="projects/historical_concessions_geographic_rdd.html" class="project-item project-item-secondary">
+<h3>Historical Concessions & Geographic RDD</h3>
+<p>Boundary-based causal design for historical concessions and local outcomes.</p>
+</a>
+
+<!--<a href="projects/policy-evaluation.html" class="project-item">
 <h3>Policy Evaluation</h3>
 <p>Causal inference for economic and policy systems.</p>
-</a>
+</a>-->
 
 </div>
 
@@ -275,24 +413,20 @@ Research Log <span class="log-note">(comments welcome)</span>
 <ul class="research-log">
 
 <li>
-<a href="discussion/causal-institutional-systems.html">
-Causal inference in institutional systems
-</a>
+<span class="research-log-placeholder">Causal inference in institutional systems — notes in preparation</span>
 </li>
 
 <li>
-<a href="discussion/policy-evaluation-frameworks.html">
-Policy evaluation frameworks
-</a>
+<span class="research-log-placeholder">Policy evaluation frameworks — notes in preparation</span>
 </li>
 
 <li>
-<a href="discussion/institutional-dynamics.html">
-Institutional dynamics and complexity
-</a>
+<span class="research-log-placeholder">Institutional dynamics and complexity — notes in preparation</span>
 </li>
 
 </ul>
+
+</div>
 
 </div>
 

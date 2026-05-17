@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Political Tweet Sentiment & Framing — Lorenzo Ognibeni</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+
+<script data-goatcounter="https://lorenzo-ai.goatcounter.com/count"
+async src="//gc.zgo.at/count.js"></script>
+
+</head>
+
+
+<body>
+
+<header class="navbar">
+
+<div class="logo">
+Signal & Structure
+</div>
+
+<nav>
+<a href="../index.html">Home</a>
+<a href="../projects.html">Projects</a>
+<a href="../notes/index.html">Research Log</a>
+<a href="../contact.html">Contact</a>
+</nav>
+
+</header>
+
+
+
+<main class="project-page">
+
+<h1 class="page-title">
+Political Tweet Sentiment & Framing
+</h1>
+
+
+<div class="project-meta">
+<span class="area-badge">NLP &amp; Text Representation</span>
+<span class="area-badge">2018</span>
+<span class="status-badge">Exploratory Applied NLP</span>
+</div>
+
+
+
+<h2>Overview</h2>
+
+<p>
+This project explored political communication on Twitter through an applied NLP
+pipeline for lexical analysis, sentiment profiling and emotion-based framing.
+</p>
+
+<p>
+The work combined tweet collection, text preprocessing, word-frequency analysis,
+n-gram extraction, sentiment analysis and emotion lexicon matching to compare
+communication patterns across political actors and time periods.
+</p>
+
+<p>
+The project should be read as an exploratory text-analytics prototype, not as a
+modern transformer-based sentiment system.
+</p>
+
+
+
+<h2>Problem</h2>
+
+<p>
+Political messages are not only informative; they also frame issues through
+specific vocabularies, emotional tones and repeated expressions.
+</p>
+
+<p>
+The goal was to build a reproducible workflow for extracting these patterns
+from Twitter data and comparing political discourse through interpretable
+textual indicators.
+</p>
+
+
+
+<h2>Example 1 — Lexical and N-Gram Analysis</h2>
+
+<p>
+The pipeline tokenized tweet text, removed punctuation and stopwords, and
+computed frequent words, bigrams and trigrams.
+</p>
+
+<pre>
+tweet text
+    ↓
+tokenization
+    ↓
+cleaning and stopword removal
+    ↓
+word frequencies, bigrams and trigrams
+</pre>
+
+<p>
+This was used to identify recurrent terms and expressions associated with
+specific political actors or thematic periods.
+</p>
+
+
+
+<h2>Example 2 — Sentiment and Emotion Profiling</h2>
+
+<p>
+The project also used sentiment and emotion lexicons to summarize the emotional
+profile of political communication.
+</p>
+
+<p>
+In particular, the workflow explored polarity scores and NRC-style emotion
+categories such as anger, fear, trust, joy and anticipation.
+</p>
+
+<p>
+These outputs were used as descriptive indicators, not as definitive measures
+of political intent.
+</p>
+
+
+
+<h2>Technologies and Methods Used</h2>
+
+<ul>
+
+<li><b>Python</b> for tweet collection, preprocessing and exploratory analysis.</li>
+
+<li><b>R</b> for text mining, visualization and exploratory sentiment workflows.</li>
+
+<li><b>GetOldTweets3</b> for historical tweet collection.</li>
+
+<li><b>pandas / NumPy</b> for tabular data handling and intermediate structures.</li>
+
+<li><b>NLTK</b> for tokenization, stopword removal and n-gram construction.</li>
+
+<li><b>TextBlob</b> for exploratory polarity and subjectivity scoring.</li>
+
+<li><b>NRC Emotion Lexicon</b> for emotion-category matching.</li>
+
+<li><b>tidytext / dplyr / ggplot2</b> for R-based text processing and visualization.</li>
+
+<li><b>matplotlib / seaborn</b> for Python-based exploratory plots.</li>
+
+</ul>
+
+
+
+<h2>Implemented Elements</h2>
+
+<ul>
+
+<li>Collection of tweet data for selected political accounts and periods.</li>
+
+<li>Cleaning of raw tweet text, links, punctuation and noisy tokens.</li>
+
+<li>Italian and English stopword filtering.</li>
+
+<li>Word-frequency analysis for political discourse comparison.</li>
+
+<li>Bigram and trigram extraction.</li>
+
+<li>Exploratory polarity and subjectivity scoring.</li>
+
+<li>Emotion profiling using lexicon-based matching.</li>
+
+<li>Bar plots and radar-style visualizations of lexical and emotional patterns.</li>
+
+</ul>
+
+
+
+<h2>Evaluation Status</h2>
+
+<p>
+The project produced descriptive NLP indicators rather than a supervised
+classification model.
+</p>
+
+<p>
+The outputs are therefore useful for exploration and comparison, but they should
+not be interpreted as externally validated sentiment labels.
+</p>
+
+<ul>
+
+<li><b>Already present:</b> lexical frequencies, n-grams, polarity scores and emotion profiles.</li>
+
+<li><b>Already present:</b> visual comparison of political-text indicators.</li>
+
+<li><b>To be added:</b> manually annotated validation set for sentiment or framing categories.</li>
+
+<li><b>To be added:</b> robustness checks across time periods, topics and political actors.</li>
+
+<li><b>To be added:</b> comparison with transformer-based language models for Italian text.</li>
+
+</ul>
+
+
+
+<h2>Methodological Note</h2>
+
+<p>
+Lexicon-based sentiment analysis is interpretable and useful for exploratory
+work, but it has important limitations.
+</p>
+
+<p>
+It may fail with irony, sarcasm, negation, political slang, multilingual
+content and context-dependent meaning. For this reason, the results should be
+treated as descriptive signals rather than as ground-truth psychological or
+political measures.
+</p>
+
+
+
+<h2>Modern Extension</h2>
+
+<p>
+A modern version of this project would preserve the interpretable descriptive
+layer while adding contextual language models and stronger evaluation.
+</p>
+
+<ul>
+
+<li>Use transformer-based models for Italian sentiment and stance detection.</li>
+
+<li>Compare lexicon-based sentiment with supervised or zero-shot classifiers.</li>
+
+<li>Add topic modeling or embedding-based clustering to identify recurrent frames.</li>
+
+<li>Evaluate sentiment and framing outputs against human annotations.</li>
+
+<li>Track discourse dynamics over time and around political events.</li>
+
+</ul>
+
+
+
+<h2>Resources</h2>
+
+<p>
+Technical report in preparation.
+</p>
+
+<p>
+Code available upon request.
+</p>
+
+
+
+<h2>Technical Context</h2>
+
+<ul>
+
+<li>
+Mohammad & Turney, <i>NRC Emotion Lexicon</i> — relevant because the project
+used lexicon-based emotion categories for exploratory profiling.
+</li>
+
+<li>
+TextBlob — relevant because the prototype used polarity and subjectivity scores
+for exploratory sentiment analysis.
+</li>
+
+<li>
+Silge & Robinson, <i>tidytext</i> — relevant to the R-based text mining and
+visualization workflow.
+</li>
+
+</ul>
+
+
+
+</main>
+
+
+
+<footer>
+
+<p>
+© 2026 Lorenzo Ognibeni — Research Fellow, CNR ISTC
+</p>
+
+</footer>
+
+
+</body>
+</html>

@@ -6,7 +6,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Partial Cointegration Strategy — Lorenzo Ognibeni</title>
+<title>Partial Cointegration & Statistical Arbitrage — Lorenzo Ognibeni</title>
+
+<meta name="description" content="Statistical arbitrage strategy based on partial cointegration, decomposing financial spreads into mean-reverting and persistent components. Implemented in R.">
 
 <link rel="stylesheet" href="../style.css">
 
@@ -29,7 +31,7 @@ Signal & Structure
 <nav>
 <a href="../index.html">Home</a>
 <a href="../projects.html">Projects</a>
-<a href="../notes/index.html">Research Notes</a>
+<a href="../notes/index.html">Research Log</a>
 <a href="../contact.html">Contact</a>
 </nav>
 
@@ -44,159 +46,336 @@ Partial Cointegration & Statistical Arbitrage
 </h1>
 
 
-<p class="note-meta">
-Research Area: Risk & Regime Modeling<br>
-Date: March 2026
-</p>
+<div class="project-meta">
+        <span class="area-badge">Finance, Risk &amp; Regime Modeling</span>
+        <span class="area-badge">2017–2018</span>
+        <span class="status-badge">Applied Prototype</span>
+</div>
 
 
 
 <h2>Overview</h2>
 
 <p>
-This project evaluates a statistical arbitrage strategy based on
-<b>partial cointegration</b>, a framework allowing financial spreads
-to combine mean-reverting dynamics with a persistent stochastic trend.
+This project explored a statistical arbitrage strategy based on
+<b>partial cointegration</b>, a framework in which the spread between two
+financial assets can contain both a mean-reverting component and a persistent
+stochastic trend.
 </p>
 
 <p>
-The goal is to assess whether this model produces more robust trading
-signals than classical Engle–Granger cointegration in equity pairs.
+The goal was to test whether partial cointegration could generate more robust
+pairs-trading signals than classical cointegration approaches based on raw
+spread residuals.
+</p>
+
+<p>
+The project was implemented in <b>R</b> and should be interpreted as an applied
+quantitative finance prototype rather than as a production trading system.
 </p>
 
 
 
-<h2>Dataset</h2>
+<h2>Problem</h2>
+
+<p>
+Classical pairs trading often relies on the idea that the spread between two
+assets is stationary and mean-reverting. In practice, this assumption can be
+too restrictive.
+</p>
+
+<p>
+Many financial spreads are only partially mean-reverting: one component may
+revert toward equilibrium, while another component may behave like a persistent
+random walk.
+</p>
+
+<p>
+Partial cointegration addresses this by decomposing the observed spread into a
+tradable mean-reverting component and a non-stationary component.
+</p>
+
+
+
+<h2>Model Idea</h2>
+
+<p>
+Given two asset price series, the spread can be written as:
+</p>
+
+<pre>
+spread_t = y_t − α − β x_t
+</pre>
+
+<p>
+In a partial cointegration framework, the spread is decomposed as:
+</p>
+
+<pre>
+spread_t = M_t + R_t
+</pre>
+
+<p>
+where <b>M_t</b> is the mean-reverting component and <b>R_t</b> is the persistent
+random-walk component.
+</p>
+
+<p>
+The trading idea is to base entry and exit decisions on the mean-reverting
+part of the spread, rather than on the raw spread alone.
+</p>
+
+
+
+<h2>Dataset and Universe</h2>
 
 <ul>
 
-<li>S&P 500 equity universe</li>
+<li>S&P 500 equity universe.</li>
 
-<li>Daily adjusted prices</li>
+<li>Daily adjusted price series.</li>
 
-<li>Correlation screening for candidate pairs</li>
+<li>Candidate equity pairs selected through correlation screening.</li>
 
-<li>Cointegration diagnostics</li>
+<li>Classical cointegration diagnostics used as benchmark comparison.</li>
+
+<li>Partial cointegration estimated for selected pairs.</li>
 
 </ul>
 
 
 
-<h2>Trading Strategy</h2>
+<h2>Example — Trading Signal</h2>
 
 <p>
-Trading signals are generated using the standardized spread:
+A standard pairs-trading signal is based on the normalized spread:
 </p>
 
-<div class="equation">
+<pre>
+z_t = (spread_t − μ) / σ
+</pre>
 
-z<sub>t</sub> = (spread<sub>t</sub> − μ) / σ
+<p>
+Positions are opened when the spread moves sufficiently far from its estimated
+equilibrium and closed when the spread reverts.
+</p>
 
-</div>
+<p>
+The partial cointegration approach tests whether the latent mean-reverting
+component produces cleaner and more stable trading signals than the raw spread
+or a classical Engle–Granger residual.
+</p>
+
+
+
+<h2>Technologies and Methods Used</h2>
 
 <ul>
 
-<li>Enter positions when |z| exceeds a threshold</li>
+<li><b>R</b> for data handling, econometric modeling and strategy prototyping.</li>
 
-<li>Close positions when the spread reverts toward equilibrium</li>
+<li><b>Time-series analysis</b> for modeling price dynamics and spreads.</li>
 
-<li>Transaction costs and slippage included</li>
+<li><b>Correlation screening</b> for selecting candidate equity pairs.</li>
+
+<li><b>Classical cointegration testing</b> as benchmark diagnostic.</li>
+
+<li><b>Partial cointegration</b> for decomposing spreads into mean-reverting and persistent components.</li>
+
+<li><b>State-space modeling</b> for representing latent spread dynamics.</li>
+
+<li><b>Kalman filtering</b> for recursive estimation of latent components.</li>
+
+<li><b>Z-score signal construction</b> for entry and exit rules.</li>
+
+<li><b>Backtesting logic</b> for evaluating simulated trading performance.</li>
+
+<li><b>Risk-return diagnostics</b> including cumulative return, Sharpe ratio and drawdown.</li>
 
 </ul>
 
 
 
-<h2>Experimental Pipeline</h2>
+<h2>Implemented Elements</h2>
 
 <ul>
 
-<li>Pair selection through correlation filtering</li>
+<li>Import and preparation of daily equity price data.</li>
 
-<li>Cointegration testing using Engle–Granger</li>
+<li>Candidate pair selection through correlation filtering.</li>
 
-<li>Partial cointegration estimation via state-space model</li>
+<li>Classical cointegration comparison.</li>
 
-<li>Signal generation and trading simulation</li>
+<li>Partial cointegration estimation in R.</li>
 
-<li>Performance evaluation (Sharpe ratio, drawdown)</li>
+<li>Construction of standardized spread-based trading signals.</li>
+
+<li>Simulation of entry and exit rules for selected equity pairs.</li>
+
+<li>Comparison between classical cointegration and partial cointegration signals.</li>
+
+<li>Basic performance evaluation through return and risk diagnostics.</li>
 
 </ul>
 
 
 
-<h2>Results</h2>
+<h2>Preliminary Results</h2>
 
 <p>
-The strategy compares classical cointegration signals with signals
-derived from the partial cointegration model.
+The prototype compared signals based on classical cointegration with signals
+derived from the partial cointegration framework.
 </p>
 
 <p>
-Preliminary experiments suggest smoother signals and fewer false
-entries relative to classical cointegration approaches.
+Preliminary experiments suggested that the partial cointegration approach could
+produce smoother signals and reduce some false entries relative to raw-spread
+or classical cointegration strategies.
+</p>
+
+<p>
+These results should be interpreted cautiously. A robust trading evaluation
+requires strict out-of-sample testing, realistic transaction costs, liquidity
+constraints and controls for data-snooping bias.
 </p>
 
 
 
-<h3>Equity Curve</h3>
-
-<img src="../images/pci_equity.png" alt="PCI vs CI equity curve" class="research-figure">
-
-
-<h3>Spread Dynamics</h3>
-
-<img src="../images/pci_spread.png" alt="Spread dynamics" class="research-figure">
-
-
-<h3>Signal Comparison</h3>
-
-<img src="../images/pci_zscore.png" alt="Z score comparison" class="research-figure">
-
-
-
-<h2>Implementation</h2>
+<h2>Figures</h2>
 
 <p>
-The pipeline is implemented in <b>R</b> using econometric time-series
-libraries for cointegration testing, state-space estimation and
-trading simulation.
+Figures in preparation.
+</p>
+
+
+
+<h2>R Implementation Sketch</h2>
+
+<p>
+The implementation was developed in R using a workflow based on pair selection,
+cointegration diagnostics, partial cointegration estimation and signal
+construction.
 </p>
 
 <pre>
 CI  <- egcm(X, Y)
 PCI <- fit.pci(X, Y)
 
-z = (spread - mean(spread)) / sd(spread)
+spread <- Y - alpha - beta * X
+z      <- (spread - mean(spread)) / sd(spread)
 </pre>
 
+<p>
+This sketch illustrates the logic of the workflow rather than the full
+implementation.
+</p>
 
 
-<h2>Technical Background</h2>
+
+<h2>Evaluation Limits</h2>
 
 <p>
-A theoretical discussion of the partial cointegration model and its
-state-space representation is available in the research note:
+The project included internal performance diagnostics, but it should not be
+interpreted as a fully validated trading system.
+</p>
+
+<ul>
+
+<li><b>Already present:</b> signal construction, trading simulation and basic risk-return diagnostics.</li>
+
+<li><b>To be strengthened:</b> strict train/test or walk-forward validation.</li>
+
+<li><b>To be strengthened:</b> transaction cost, slippage and liquidity sensitivity.</li>
+
+<li><b>To be strengthened:</b> robustness across different market regimes and estimation windows.</li>
+
+<li><b>To be strengthened:</b> controls for look-ahead bias, survivorship bias and data-snooping.</li>
+
+<li><b>To be strengthened:</b> comparison against additional baselines such as distance-based pairs trading.</li>
+
+</ul>
+
+
+
+<h2>Methodological Note</h2>
+
+<p>
+The main value of the project is methodological: it treats financial spreads
+as latent dynamic objects rather than as simple residual series.
 </p>
 
 <p>
-<a href="../notes/partial-cointegration.html">
-Partial Cointegration: Model and Kalman Representation
-</a>
+This connects naturally to broader themes in quantitative finance and financial
+risk modeling: observed prices are noisy signals of underlying latent processes,
+and trading or risk decisions depend on how those latent processes are
+estimated.
 </p>
+
+
+
+<h2>Modern Extension</h2>
+
+<p>
+A modern version of this project would keep the partial cointegration framework
+but evaluate it with a more rigorous experimental design.
+</p>
+
+<ul>
+
+<li>Use rolling or walk-forward estimation windows.</li>
+
+<li>Compare partial cointegration against classical cointegration and distance-based pairs trading.</li>
+
+<li>Include realistic transaction costs, shorting constraints and liquidity filters.</li>
+
+<li>Run sensitivity analysis over thresholds, window lengths and pair-selection rules.</li>
+
+<li>Evaluate performance stability across market regimes.</li>
+
+<li>Track turnover, exposure, drawdown duration and tail risk, not only average return.</li>
+
+</ul>
 
 
 
 <h2>Resources</h2>
 
 <p>
-<a href="../reports/partial_cointegration_report.pdf">
-Project Report (PDF)
+Technical report in preparation.
+</p>
+
+<p>
+<a href="../notes/partial-cointegration.html">
+Technical Note: Partial Cointegration and Kalman Representation
 </a>
 </p>
 
 <p>
 Code available upon request.
 </p>
+
+
+
+<h2>Technical Context</h2>
+
+<ul>
+
+<li>
+Engle & Granger (1987), <i>Co-integration and Error Correction</i> — relevant
+as the classical benchmark for cointegration-based spread modeling.
+</li>
+
+<li>
+Clegg & Krauss (2018), <i>Pairs Trading with Partial Cointegration</i> —
+relevant to the partial cointegration framework for statistical arbitrage.
+</li>
+
+<li>
+Durbin & Koopman (2012), <i>Time Series Analysis by State Space Methods</i> —
+relevant to the state-space and Kalman filtering representation.
+</li>
+
+</ul>
 
 
 

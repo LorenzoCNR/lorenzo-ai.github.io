@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hospital Flow Forecasting with LSTM - Lorenzo Ognibeni</title>
+
+<meta name="description" content="Applied machine learning prototype for hospital-flow forecasting using triage timestamps, temporal aggregation, LSTM encoder-decoder models and walk-forward validation.">
+
+<link rel="stylesheet" href="../style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+
+<script data-goatcounter="https://lorenzo-ai.goatcounter.com/count"
+async src="//gc.zgo.at/count.js"></script>
+
+</head>
+
+
+<body>
+
+<header class="navbar">
+
+<div class="logo">
+Signal & Structure
+</div>
+
+<nav>
+<a href="../index.html">Home</a>
+<a href="../projects.html">Projects</a>
+<a href="../notes/index.html">Research Log</a>
+<a href="../contact.html">Contact</a>
+</nav>
+
+</header>
+
+
+
+<main class="project-page">
+
+<h1 class="page-title">
+Hospital Flow Forecasting with LSTM
+</h1>
+
+
+<div class="project-meta">
+<span class="area-badge">Applied Machine Learning</span>
+<span class="area-badge">2019</span>
+<span class="status-badge">Applied Prototype</span>
+</div>
+
+
+
+<h2>Overview</h2>
+
+<p>
+This project explored neural time-series forecasting for hospital flow data.
+The workflow transformed emergency-department timestamps into temporal features
+and tested LSTM-based models for short-horizon forecasting of operational
+dynamics.
+</p>
+
+<p>
+The focus was not deterministic prediction of individual patients. The goal was
+to build an applied forecasting prototype for aggregated hospital activity:
+arrival intensity, inter-arrival times, temporal variability and short-term
+load patterns.
+</p>
+
+
+
+<h2>Problem Setting</h2>
+
+<p>
+Hospital operations are shaped by irregular arrivals, daily and weekly cycles,
+triage composition and local demand shocks. Raw event timestamps therefore need
+to be converted into structured time-series data before they can support
+forecasting or planning.
+</p>
+
+<p>
+The project framed the problem as multi-step forecasting over aggregated
+hospital-flow indicators, using historical time windows to forecast future
+intervals.
+</p>
+
+
+
+<h2>Data Preparation</h2>
+
+<p>
+The pipeline started from timestamped triage and acceptance records. These
+records were cleaned, ordered and converted into time-indexed variables.
+</p>
+
+<ul>
+<li>Parsed acceptance timestamps into date, hour and weekday fields.</li>
+<li>Computed inter-arrival times from consecutive records.</li>
+<li>Handled day-boundary effects when differencing timestamps.</li>
+<li>Aggregated observations into fixed time windows, including three-hour intervals.</li>
+<li>Built train and test datasets across different calendar periods.</li>
+<li>Constructed mean, standard deviation and count-based flow indicators.</li>
+</ul>
+
+
+
+<h2>Modeling Approach</h2>
+
+<p>
+The neural forecasting layer used LSTM models to learn temporal dependencies
+from lagged windows of hospital-flow variables. One implementation followed an
+encoder-decoder structure for multi-step forecasts.
+</p>
+
+<p>
+In this setting, the encoder reads the past sequence and compresses it into an
+internal representation. The decoder uses that representation to generate a
+future sequence, such as the next set of operational intervals.
+</p>
+
+<ul>
+<li>LSTM layers for sequential dependency modeling.</li>
+<li>RepeatVector and sequence-returning LSTM layers for encoder-decoder forecasting.</li>
+<li>TimeDistributed dense layers for step-by-step output generation.</li>
+<li>Min-max scaling and supervised learning windows for neural-network input.</li>
+</ul>
+
+
+
+<h2>Validation</h2>
+
+<p>
+The prototype included walk-forward validation logic. Forecasts were generated
+for each test window, compared with realized values and then the realized
+window was added to the history before the next forecast.
+</p>
+
+<p>
+Evaluation used RMSE-style diagnostics both at the aggregate forecast level and
+across individual forecast steps. This made it possible to inspect whether
+errors were concentrated in specific parts of the forecast horizon.
+</p>
+
+
+
+<h2>Interpretation</h2>
+
+<p>
+The project is best understood as an applied machine-learning prototype for
+healthcare operations, not as a production-grade hospital staffing system. Its
+value is in the full workflow: event-data cleaning, temporal aggregation,
+supervised sequence construction, LSTM modeling and forecast evaluation.
+</p>
+
+<p>
+It also provides a useful bridge between time-series econometrics and modern
+deep-learning forecasting: the same operational problem can be studied with
+classical models, recurrent neural networks and more recent sequence models.
+</p>
+
+
+
+<h2>Technologies</h2>
+
+<ul>
+<li>Python</li>
+<li>pandas</li>
+<li>NumPy</li>
+<li>scikit-learn</li>
+<li>Keras / TensorFlow</li>
+<li>LSTM recurrent neural networks</li>
+<li>Matplotlib</li>
+</ul>
+
+
+
+<h2>Future Extensions</h2>
+
+<p>
+A modern version of this project would compare LSTM forecasts against classical
+baselines and newer architectures, including gradient-boosted tabular models,
+temporal convolutional networks or transformer-based sequence models. It would
+also add stronger calendar features, uncertainty intervals and explicit
+operational metrics for capacity planning.
+</p>
+
+</main>
+
+
+<footer>
+
+<p>
+© 2026 Lorenzo Ognibeni - Research Fellow, CNR ISTC
+</p>
+
+</footer>
+
+</body>
+</html>

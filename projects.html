@@ -8,6 +8,8 @@
 
 <title>Projects — Lorenzo Ognibeni</title>
 
+<meta name="description" content="Selected research and modeling projects by Lorenzo Ognibeni — representation learning, NLP, financial risk and causal systems.">
+
 <link rel="stylesheet" href="style.css">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
@@ -28,7 +30,7 @@ Signal & Structure
 
 <nav>
 <a href="index.html">Home</a>
-<a href="notes/index.html">Research Notes</a>
+<a href="notes/index.html">Research Log</a>
 <a href="contact.html">Contact</a>
 </nav>
 
@@ -43,27 +45,58 @@ Signal & Structure
 
 <section class="project-section" id="representation">
 
-<h2>Representation Learning</h2>
+<h2 class="area-title">Representation Learning</h2>
 
 <p>
-Contrastive learning and manifold modelling for neural systems.
+Contrastive learning, latent structure and geometric representation of neural systems.
 </p>
 
-<div class="project-grid">
+<div class="projects-grid">
 
-<a href="#" class="project-item">
-<h3>Neuro-Bridge</h3>
-<p>Contrastive manifold learning for neural activity.</p>
+<a href="projects/neuro_bridge.html" class="project-item">
+<h3>NeuroBridge</h3>
+<p>Modular framework for neural representation learning, contrastive sampling and latent dynamics.</p>
 </a>
 
-<a href="#" class="project-item">
+<a href="projects/medical_image_segmentation_unet.html" class="project-item">
+<h3>Medical Image Segmentation with U-Net</h3>
+<p>Deep-learning prototype for CT image segmentation with encoder-decoder CNNs and IoU evaluation.</p>
+</a>
+
+<a href="projects/hospital_flow_forecasting_lstm.html" class="project-item">
+<h3>Hospital Flow Forecasting with LSTM</h3>
+<p>Applied machine-learning prototype for hospital-flow forecasting with triage timestamps, temporal aggregation and walk-forward validation.</p>
+</a>
+
+<!--<a href="projects/cebra-pipeline.html" class="project-item">
 <h3>CEBRA Pipeline</h3>
-<p>Representation learning for neural decoding.</p>
+<p>Representation learning and neural decoding.</p>
+</a>-->
+
+</div>
+
+</section>
+
+
+
+<section class="project-section" id="nlp">
+
+<h2 class="area-title">NLP & Text Representation</h2>
+
+<p>
+Text representation, semantic similarity and information retrieval in specialized corpora.
+</p>
+
+<div class="projects-grid">
+
+<a href="projects/legal_nlp_query_expansion.html" class="project-item">
+<h3>Legal NLP & Query Expansion</h3>
+<p>Seed-based retrieval, TF-IDF scoring and word embeddings for legal terminology expansion.</p>
 </a>
 
-<a href="#" class="project-item">
-<h3>Neural Geometry</h3>
-<p>Topological structure of neural representations.</p>
+<a href="projects/political_tweet_sentiment.html" class="project-item">
+<h3>Political Tweet Sentiment & Framing</h3>
+<p>Applied NLP pipeline for lexical analysis, sentiment and emotion profiling of political tweets.</p>
 </a>
 
 </div>
@@ -74,30 +107,38 @@ Contrastive learning and manifold modelling for neural systems.
 
 <section class="project-section" id="risk">
 
-<h2>Systemic Risk</h2>
+<h2 class="area-title">Finance, Risk & Regime Modeling</h2>
 
-<div class="project-grid">
+<p>
+Quantitative finance, state-space models and regime-aware risk prototypes.
+</p>
 
+<div class="projects-grid">
 
-<a href="#" class="project-item">
-<h3>Bayesian VaR</h3>
-<p>Extreme risk modelling.</p>
-</a>
+<!--<a href="projects/systemic-risk.html" class="project-item">
+<h3>Systemic Risk Modeling</h3>
+<p>Probabilistic modeling of financial instability and systemic dependence.</p>
+</a>-->
 
 <a href="projects/partial-cointegration.html" class="project-item">
 <h3>Partial Cointegration</h3>
-<p>
-Hybrid mean-reverting and stochastic trend models for statistical arbitrage
-and regime-dependent spread dynamics.
-</p>
+<p>Hybrid mean-reverting and stochastic trend models for statistical arbitrage.</p>
 </a>
 
-
-<a href="#" class="project-item">
-<h3>Regime Switching</h3>
-<p>Markov regime models.</p>
+<a href="projects/structured_certificate_pricing.html" class="project-item">
+<h3>Structured Certificate Pricing & Credit Risk</h3>
+<p>Replication-based pricing of an equity protection certificate with Black-Scholes, NSS yield curves and credit-risk extensions.</p>
 </a>
 
+<a href="projects/systemic_risk_delta_covar.html" class="project-item">
+<h3>Systemic Risk & Rolling Delta CoVaR</h3>
+<p>Rolling quantile-regression framework for estimating institutional contributions to systemic risk.</p>
+</a>
+
+<a href="projects/portfolio_risk_allocation.html" class="project-item">
+<h3>Portfolio Risk Allocation</h3>
+<p>Black-Litterman and equal-risk-contribution portfolio construction with resampling and rolling allocation diagnostics.</p>
+</a>
 
 </div>
 
@@ -105,22 +146,49 @@ and regime-dependent spread dynamics.
 
 
 
-
-
 <section class="project-section" id="causal">
 
-<h2>Causal Systems</h2>
+<h2 class="area-title">Causal & Institutional Systems</h2>
 
-<div class="project-grid">
+<p>
+Causal inference, policy evaluation and shock-transmission analysis in institutional systems.
+</p>
 
-<a href="#" class="project-item">
-<h3>Geographic RDD</h3>
-<p>Spatial causal inference.</p>
+<div class="projects-grid">
+
+<a href="projects/bayesian_var_geopolitical_risk.html" class="project-item">
+<h3>Bayesian VAR & Institutional Shocks</h3>
+<p>Bayesian analysis of policy uncertainty, institutional shocks and macroeconomic transmission.</p>
 </a>
 
-<a href="#" class="project-item">
-<h3>Conflict Modelling</h3>
-<p>Early warning signals.</p>
+<a href="projects/historical_concessions_geographic_rdd.html" class="project-item">
+<h3>Historical Concessions & Geographic RDD</h3>
+<p>Geographic regression-discontinuity design for historical concessions, public goods, conflict and night lights.</p>
+</a>
+
+<!--<a href="projects/policy-evaluation.html" class="project-item">
+<h3>Policy Evaluation</h3>
+<p>Causal inference for economic, institutional and policy systems.</p>
+</a>-->
+
+</div>
+
+</section>
+
+
+<section class="project-section" id="applied-data-science">
+
+<h2 class="area-title">Applied Data Science & Business Modeling</h2>
+
+<p>
+Cloud analytics, predictive modeling and decision support for business systems.
+</p>
+
+<div class="projects-grid">
+
+<a href="projects/adtech_analytics_click_dynamics.html" class="project-item">
+<h3>Ad-Tech Analytics & Click Dynamics</h3>
+<p>Cloud-based advertising analytics pipeline for seasonality, click dynamics, revenue modeling and budget decision support.</p>
 </a>
 
 </div>
